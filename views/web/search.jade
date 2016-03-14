@@ -1,0 +1,20 @@
+extends ../index
+block content
+    script(src="/dist/scripts/web/search.js")
+    div(class="searchPage")
+        div(class="row header")
+            div(class="col-md-offset-8 col-md-2")
+                div(class="search")
+                    img(src="/images/magnifier.png")
+                    input(type="text", class="searchInput")
+        - if(members && members.length)
+            div(class="container")
+                div(class="list")
+                    include ../components/list
+        - else if(members && members.length == 0)
+            div(class="nolist")
+                img(src="/images/cloud@2x.png")
+                div 很抱歉，我们无法找到 <span class='searchName'> #{name} </span> 的结果
+        //div(class="footer")
+        //    include ../components/footer
+
