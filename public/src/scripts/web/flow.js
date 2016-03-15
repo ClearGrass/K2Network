@@ -16,7 +16,7 @@ $(function(){
             $.get('/ajax/get?id=' + id, function(data){
                 $.get('/dist/templates/card.html', function(tmpl){
                     $.blockUI({
-                        message: _.template(tmpl)(data.members[0]),
+                        message: _.template(tmpl)(data),
                         css: {
                             color:'#5d5d5d',
                             backgroundColor:'white',

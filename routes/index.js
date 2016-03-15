@@ -83,13 +83,13 @@ router.get("/ajax/get", function (req, res, next) {
   skip = skip ? skip : 0
   limit = limit ? limit : 30
   var text = req.params.searchText;
-  db.all("select * from member where id=" + id, function(err, rows) {
-    var entries = {
-      "members" : rows,
-      "skip": skip,
-      "limit": limit
+  db.all("select * from member where id=" + id + " limit 1", function(err, rows) {
+    if (rows && rows.length > 0) {
+        res.json(rows[0])
+    } else {
+        res.json({})
     }
-    res.json(entries)
+
     db.close()
   })
 
