@@ -1,3 +1,10 @@
-extends ../index
+extends ../index_mob
 block content
-    div(class="container") #{title}
+    div(class="homePage")
+        div(class="header")
+            include header
+        div(class="container")
+            include ../components/list
+        div(class="footer")
+            include ../components/footer
+                          

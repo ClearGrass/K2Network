@@ -1,5 +1,6 @@
 var express = require('express');
 var sqlite = require('sqlite3');
+var Util = require('../base/Util');
 var Interface = require('../base/Interface');
 
 var router = express.Router();
@@ -10,7 +11,27 @@ router.get("/", function (req, res, next) {
   Interface.ajax({path: '/ajax/list', method: 'GET'}).then(function(data){
     res.render("web/k2", data);
     console.log(data);
-  });
+  }, Util.errCall);
+});
+
+/* GET mobile home page */
+router.get("/mobile", function (req, res, next) {
+  Interface.ajax({path: '/ajax/list', method: 'GET'}).then(function(data){
+    res.render("mobile/mobile", data);
+    console.log(data);
+  }, Util.errCall);
+});
+
+/* GET mobile item page */
+router.get("/mobile/item", function (req, res, next) {
+  if(req.query && req.query.id){
+    Interface.ajax({path: '/ajax/get?id='+req.query.id, method: 'GET'}).then(function(data){
+      res.render("mobile/item", data);
+      console.log(data);
+    }, Util.errCall);
+  } else {
+    res.render('Error: Require param id!');
+  }
 });
 
 /* GET search page. */

@@ -3,7 +3,8 @@ var config = {
         host: 'localhost',
         port: 3000,
         path: '/',
-        method: 'GET'
+        method: 'GET',
+        params: {}
     }
 };
 

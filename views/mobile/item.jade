@@ -1,0 +1,30 @@
+doctype html
+html( lang="zh-CN")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport",content="width=device-width, initial-scale=1.0, user-scalable=0;")
+        title= "K2 创业网络"
+        link(rel="stylesheet",type="text/css",href="/dist/styles/bootstrap.css")
+        link(rel = "stylesheet", type = "text/css", href = "/dist/styles/item_mob.css")
+        script(src="/dist/scripts/vendors/jquery/jquery-1.11.3.min.js")
+        script(src="/dist/scripts/vendors/jquery/jquery.blockUI.js")
+        script(src="/dist/scripts/vendors/underscore.js")
+        script(src="/dist/scripts/vendors/bootstrap.min.js")
+        script(src="/dist/scripts/vendors/masonry.js")
+        script(src="/dist/scripts/vendors/imagesloaded.js")
+        script(src="/dist/scripts/mobile/item.js")
+
+    body
+        div(class="itemPage")
+            div(class="header")
+                div(class="row searchBar")
+                    div(class="col-xs-offset-11 col-xs-1 closeBtn")
+                        img(src="/images/closeBtn.png")
+                div(class="row")
+                    div(class="col-xs-12 avatar")
+                        img(src=image_url)
+            div(class="container")
+                h3= name
+                div(class="dec")= intro
+                div(class="weibo")= weibo_snippet
+                a(src=weibo_url, class="url")= weibo_url

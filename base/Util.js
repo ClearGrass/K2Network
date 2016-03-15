@@ -5,6 +5,9 @@ var Util = {
             obj[key] = src[key] ? src[key] : opts[key];
         }
         return obj;
+    },
+    errCall: function(err){
+        res.render(err);
     }
 };
 

@@ -20,6 +20,7 @@ var ajax = function(conf){
         console.log("auth_user error: " + e.message);
         deferred.reject(e);
     });
+    req.write(require('querystring').stringify(conf.params));
     req.end();
     return deferred.promise;
 };

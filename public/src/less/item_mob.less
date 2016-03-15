@@ -1,0 +1,39 @@
+@import "base.less";
+
+*{.pd(0px); .mg(0px); .b(0px); .c(#4e4e4e);}
+li{list-style: none;}
+.container{.pd(0px);}
+.row{.mg(0px); .pd(0px);}
+
+.itemPage{
+  .header{
+    .searchBar{
+      .mg(0px);  .pd(10px 0px);
+      .bgc(white); .pr(); .z(10);
+      box-shadow: #999 0px 5px 20px;
+      .closeBtn{
+        .pd(0px);
+        img{
+          .w(20px); .h(20px);
+        }
+      }
+    }
+    .avatar{
+      .pd(0px);
+      img{.w(100%); .h(auto);}
+    }
+  }
+  .container{
+    h3{.tc();}
+    .dec{
+      .pd(20px 30px);
+    }
+    .weibo{
+      .pd(40px 30px 0px); .f(20px);
+    }
+    .url{
+      .c(#4e4e4e);
+      .pd(0px 30px 40px);
+    }
+  }
+}
