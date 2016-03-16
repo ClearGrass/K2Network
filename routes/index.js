@@ -5,10 +5,30 @@ var Interface = require('../base/Interface');
 
 var router = express.Router();
 
+/* 中间件分发 */
+router.get("/", function (req, res, next){
+  var ua = req.headers['user-agent'].toLowerCase();
+  console.log(ua, ua.indexOf('android') < 0, ua.indexOf('iphone') < 0);
+  if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
+    next();
+  } else {
+    res.redirect('/mobile');
+  }
+});
+
+router.get("/mobile", function (req, res, next){
+  var ua = req.headers['user-agent'].toLowerCase();
+  console.log(ua, ua.indexOf('android') < 0, ua.indexOf('iphone') < 0);
+  if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
+    res.redirect('/');
+  } else {
+    next();
+  }
+});
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  Interface.ajax({path: '/ajax/list', method: 'GET'}).then(function(data){
+  Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
     res.render("web/k2", data);
     console.log(data);
   }, Util.errCall);
@@ -16,7 +36,7 @@ router.get("/", function (req, res, next) {
 
 /* GET mobile home page */
 router.get("/mobile", function (req, res, next) {
-  Interface.ajax({path: '/ajax/list', method: 'GET'}).then(function(data){
+  Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
     res.render("mobile/mobile", data);
     console.log(data);
   }, Util.errCall);
@@ -25,7 +45,7 @@ router.get("/mobile", function (req, res, next) {
 /* GET mobile item page */
 router.get("/mobile/item", function (req, res, next) {
   if(req.query && req.query.id){
-    Interface.ajax({path: '/ajax/get?id='+req.query.id, method: 'GET'}).then(function(data){
+    Interface.ajax({path: '/api/get?id='+req.query.id, method: 'GET'}).then(function(data){
       res.render("mobile/item", data);
       console.log(data);
     }, Util.errCall);
@@ -37,7 +57,7 @@ router.get("/mobile/item", function (req, res, next) {
 /* GET search page. */
 router.get("/search", function (req, res, next) {
     if(req.query.search){
-        Interface.ajax({path: '/ajax/search/' + req.query.search, method: 'GET'}).then(function(data){
+        Interface.ajax({path: '/api/search/' + req.query.search, method: 'GET'}).then(function(data){
             if(data.members && data.members.length){
                 res.render("web/search", data);
             } else {
@@ -50,35 +70,36 @@ router.get("/search", function (req, res, next) {
     }
 });
 
-router.get('/ajax/list', function(req, res, next) {
-  var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
-  var skip = req.query.skip ? parseInt(req.query.skip) : 0
-  var limit = req.query.limit ? parseInt(req.query.limit) : 0
-  skip = skip ? skip : 0
-  limit = limit ? limit : 30
+
+router.get('/api/list', function(req, res, next) {
+  var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY);
+  var skip = req.query.skip ? parseInt(req.query.skip) : 0;
+  var limit = req.query.limit ? parseInt(req.query.limit) : 0;
+  skip = skip ? skip : 0;
+  limit = limit ? limit : 30;
   db.each("select count(0) from member", function(err, row){
-    totalCount = (row['count(0)'])
+    totalCount = (row['count(0)']);
     db.all("select * from member limit " + skip + "," + limit, function(err, rows) {
-      console.log(JSON.stringify(rows))
+      console.log(JSON.stringify(rows));
       var entries = {
         "members" : rows,
         "totalCount": totalCount,
         "skip": skip,
         "limit": limit
-      }
-      res.json(entries)
-      db.close()
+      };
+      res.json(entries);
+      db.close();
     })
   })
 
 });
 
-router.get("/ajax/search/:searchText", function (req, res, next) {
-  var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
-  var skip = req.query.skip ? parseInt(req.query.skip) : 0
-  var limit = req.query.limit ? parseInt(req.query.limit) : 0
-  skip = skip ? skip : 0
-  limit = limit ? limit : 30
+router.get("/api/search/:searchText", function (req, res, next) {
+  var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY);
+  var skip = req.query.skip ? parseInt(req.query.skip) : 0;
+  var limit = req.query.limit ? parseInt(req.query.limit) : 0;
+  skip = skip ? skip : 0;
+  limit = limit ? limit : 30;
   var text = req.params.searchText;
   db.all("select * from member where 1=0\
     or  name like '%" + text + "%'\
@@ -89,32 +110,30 @@ router.get("/ajax/search/:searchText", function (req, res, next) {
       "members" : rows,
       "skip": skip,
       "limit": limit
-    }
-    res.json(entries)
-    db.close()
-  })
+    };
+    res.json(entries);
+    db.close();
+  });
+});
 
-})
-
-router.get("/ajax/get", function (req, res, next) {
-  var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
-  var skip = req.query.skip ? parseInt(req.query.skip) : 0
-  var limit = req.query.limit ? parseInt(req.query.limit) : 0
-  var id = req.query.id || ''
-  skip = skip ? skip : 0
-  limit = limit ? limit : 30
+router.get("/api/get", function (req, res, next) {
+  var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY);
+  var skip = req.query.skip ? parseInt(req.query.skip) : 0;
+  var limit = req.query.limit ? parseInt(req.query.limit) : 0;
+  var id = req.query.id || '';
+  skip = skip ? skip : 0;
+  limit = limit ? limit : 30;
   var text = req.params.searchText;
   db.all("select * from member where id=" + id + " limit 1", function(err, rows) {
     if (rows && rows.length > 0) {
-        res.json(rows[0])
+      res.json(rows[0]);
     } else {
-        res.json({})
+      res.json({});
     }
+    db.close();
+  });
 
-    db.close()
-  })
-
-})
+});
 
 
 module.exports = router;
