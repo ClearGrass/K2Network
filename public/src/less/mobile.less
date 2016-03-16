@@ -13,7 +13,7 @@ li{list-style: none;}
     .bgsize(230%);  .bgpos(50% 13%); .bgrepeat(no-repeat);
     .searchBar{
       .mg(0px);  .pd(10px 0px);
-      .bgc(white); .pr(); .z(10);
+      .bgc(white); .pf(); .z(10); .w(100%);
       box-shadow: #999 0px 5px 20px;
       .search{
         .w(100%); .bgc(#bebebe);
@@ -41,21 +41,24 @@ li{list-style: none;}
         }
       }
     }
-    .tab{
-      .pd(10px); .mg(0px 15px 15px);
-      .bgimg('/images/tip_bg.png');
-      .bgcenter();
-      .icon{
-        img{
-          .mg(50px auto 30px); .disB();
-          .w(50px); .h(50px);
+    .cxt{
+      .pd(45px 0px 0px);
+      .tab{
+        .pd(10px); .mg(0px 15px 15px);
+        .bgimg('/images/tip_bg.png');
+        .bgcenter();
+        .icon{
+          img{
+            .mg(50px auto 30px); .disB();
+            .w(50px); .h(50px);
+          }
         }
-      }
-      h3{
-        .c(@word); .tc();
-      }
-      .text{
-        .c(@word); .f(12px); .pd(20px 0px 80px);
+        h3{
+          .c(@word); .tc();
+        }
+        .text{
+          .c(@word); .f(12px); .pd(20px 0px 80px);
+        }
       }
     }
     .search{

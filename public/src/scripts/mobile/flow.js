@@ -11,9 +11,6 @@ $(function(){
             var $li = $(this);
             var id = $li.attr('id');
             location.href = "/mobile/item?id=" + id;
-            $.get('/ajax/get?id=' + id, function(data){
-
-            });
         })
         .on('keypress', function(e){
             if($('.searchBar .search input:active') && e.which == 13){

@@ -1,5 +1,6 @@
 $(function(){
     $('body').on('click', '.closeBtn img', function(e){
-        location.href = '/mobile';
+        //location.href = '/mobile';
+        history.back();
     });
 });

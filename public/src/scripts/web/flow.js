@@ -13,32 +13,50 @@ $(function(){
         .on('click', '.container ul li', function(e){
             var $li = $(this);
             var id = $li.attr('id');
-            $.get('/ajax/get?id=' + id, function(data){
-                $.get('/dist/templates/card.html', function(tmpl){
-                    $.blockUI({
-                        message: _.template(tmpl)(data),
-                        css: {
-                            color:'#5d5d5d',
-                            backgroundColor:'white',
-                            border:0,
-                            width: '30%',
-                            height: 'auto',
-                            top: '8%',
-                            'box-shadow': '#999 0px 5px 20px',
-                            'border-radius': 10
-                        },
-                        overlayCSS: {
-                            backgroundColor: 'white',
-                            opacity: 0.8
-                        }
+
+            var ua = navigator.userAgent.toLowerCase();
+            if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
+                $.get('/api/get?id=' + id, function(data){
+                    $.get('/dist/templates/card.html', function(tmpl){
+                        $.blockUI({
+                            message: _.template(tmpl)(data),
+                            css: {
+                                color:'#5d5d5d',
+                                backgroundColor:'white',
+                                border:0,
+                                width: '30%',
+                                height: 'auto',
+                                top: '8%',
+                                'box-shadow': '#999 0px 5px 20px',
+                                'border-radius': 10
+                            },
+                            overlayCSS: {
+                                backgroundColor: 'white',
+                                opacity: 0.8
+                            }
+                        });
                     });
                 });
-
-            });
-
+            } else {
+                location.href = '/mobile/item?id=' + id;
+            }
         })
         .on('click', '.blockOverlay', function(){
             $.unblockUI();
+        })
+        .on('keypress', function(e){
+            if($('.searchRow .search input:active') && e.which == 13){
+                var val = $('.searchRow .search input').val();
+                location.href = "/search?search=" + val;
+            }
+        });
+        $(window).scroll(function(e){
+            //console.log($(window).scrollTop());
+            if($(window).scrollTop() >= 700){
+                $('.searchRow').addClass('searchTop');
+            } else {
+                $('.searchRow').removeClass('searchTop');
+            }
         });
 
 });
