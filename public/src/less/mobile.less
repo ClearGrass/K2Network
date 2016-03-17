@@ -14,7 +14,7 @@ li{list-style: none;}
     .searchBar{
       .mg(0px);  .pd(10px 0px);
       .bgc(white); .pf(); .z(10); .w(100%);
-      box-shadow: #999 0px 5px 20px;
+      box-shadow: #999 0px 0px 10px;
       .search{
         .w(100%); .bgc(#bebebe);
         .pd(3px 0px 3px 10px);
@@ -25,14 +25,17 @@ li{list-style: none;}
           //.mg(0px 0px 0px 5px);
         }
         .searchInput{
-          .w(70%); .bgc(transparent); .disIB();
-          .mg(0px 5px); .c(white); .vm();
-          .b(0px); .lh(20px);
+          .ff("PingFangSC Light");
+          .w(60%); .bgc(transparent); .disIB();
+          .mg(0px 10px); .c(white); .vm();
+          .b(0px); .lh(20px); .tc();
         }
         .searchInput:focus{
           .b(0px); .lh(20px);
-          outline:none;
+          outline:none; .tc();
         }
+        .searchInput::-webkit-input-placeholder{  .c(white); .tc();  }
+        .searchInput:focus::-webkit-input-placeholder{  .c(white); .tc(); .opacity(50);  }
       }
       .closeBtn{
         .pd(3px);
@@ -79,7 +82,7 @@ li{list-style: none;}
       float: left;
       .thumbnail{
         .pd(0px);
-        box-shadow: #999 0px 5px 20px;
+        box-shadow: #999 0px 5px 15px;
         .b(0px); .br(10px);
         .avatar{
           .w(100%);
@@ -88,16 +91,16 @@ li{list-style: none;}
         }
         .caption{
           .pd(10px);
-          h3{ .mg(0px); .pd(5px 0px); }
-          p{  .mg(20px 0px);  }
+          h3{ .mg(0px); .pd(5px 0px); .ff("PingFangSC Regular"); .c(#4e4e4e);  }
+          p{  .mg(20px 0px); .ff("PingFangSC Regular"); .c(#4e4e4e);  }
           .weibo{
             .pd(10px 0px);
             img{.h(20px); .vm(); .mg(0px auto); .disB(); }
             span{
-              .f(20px); .vm();
+              .f(20px); .vm(); .ff("PingFangSC Regular"); .c(#4e4e4e);
             }
           }
-          a{.c(@word);}
+          a{.ff("PingFangSC Regular"); .c(#4e4e4e); text-decoration: underline;}
         }
       }
     }
@@ -121,7 +124,7 @@ li{list-style: none;}
   .header{
     .mg(0px);  .pd(10px 0px);
     .bgc(white); .pr(); .z(10);
-    box-shadow: #999 0px 5px 20px;
+    box-shadow: #999 0px 0px 10px;
     .search{
       .w(100%); .bgc(#7f7f7f);
       .pd(3px 0px 3px 10px);
@@ -148,7 +151,7 @@ li{list-style: none;}
       float: left;
       .thumbnail{
         .pd(0px);
-        box-shadow: #999 0px 5px 20px;
+        box-shadow: #999 0px 5px 15px;
         .b(0px); .br(10px);
         .avatar{
           .w(100%);

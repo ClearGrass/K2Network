@@ -30,66 +30,71 @@ li{list-style: none;}
     }
     .searchRow{
       .pa(); top:700px; .w(100%);
-      .pd(5px 0px);
+      .pd(5px 20%);
       .search{
         //.pd(140px 0px 50px);
         .pd(3px 0px 3px 10px);
         .w(100%); .bgc(#bebebe); .br(14px);
         //cursor: pointer;
         img{
-          .vm(); .disIB();
+          .vm(); .disI();
           .w(20px);  .h(auto);
           //.mg(0px 0px 0px 5px);
         }
         .searchInput{
+          .ff("PingFangSC Light");
           .w(70%); .bgc(transparent); .disIB();
-          .mg(0px 10px); .c(white); .vm();
-          .b(0px); .lh(20px);
+          .mg(0px auto); .c(white); .vm();
+          .b(0px); .lh(20px); .tc();
         }
         .searchInput:focus{
           .b(0px); .lh(20px);
-          outline:none;
+          outline:none; .tc();
         }
+        .searchInput::-webkit-input-placeholder{  .c(white); .tc();  }
+        .searchInput::-moz-placeholder{.c(white); .tc();}
+        .searchInput:focus::-webkit-input-placeholder, .searchInput:focus::-moz-placeholder{  .c(white); .tc(); .opacity(50);  }
       }
     }
     .searchTop{
-      box-shadow: #999 0px 5px 20px;
+      box-shadow: #999 0px 0px 10px;
       .bgc(white); top: 0px; .pf(); .z(10);
     }
   }
+  .container{
+    .w(60%);
+    .row{
+      .pd(0px); .mg(0px);
 
-  //.container{
-  //.w(70%);
-  .row{
-    .pd(0px); .mg(0px);
-
-    .item{
-      float: left;
-      .thumbnail{
-        .pd(0px);
-        box-shadow: #999 0px 5px 20px;
-        .b(0px); .br(10px);
-        .avatar{
-          .w(100%);
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-        .caption{
-          .pd(30px);
-          h3{ .pd(10px 0px);}
-          .weibo{
-            .pd(10px 0px);
-            img{.h(20px); .mg(0px 10px); .vm();}
-            span{
-              .f(20px); .vm();
-            }
+      .item{
+        float: left;
+        .pd(5px 18px);
+        .thumbnail{
+          .pd(0px);
+          box-shadow: #999 0px 5px 15px;
+          .b(0px); .br(10px);
+          .avatar{
+            .w(100%);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
           }
-          a{.c(@word);}
+          .caption{
+            .pd(30px);
+            h3{ .pd(10px 0px); .c(#4e4e4e);.ff("PingFangSC Regular");}
+            p, .weibo, span{.t(left); .ff("PingFangSC Regular"); .c(#4e4e4e); }
+            .weibo{
+              .pd(10px 0px);
+              img{.h(20px); .mg(0px 10px); .vm();}
+              span{
+                .f(20px); .vm(); .c(#4e4e4e);.ff("PingFangSC Regular");
+              }
+            }
+            a{.c(#4e4e4e);.ff("PingFangSC Regular"); text-decoration: underline;}
+          }
         }
       }
     }
   }
-  //}
 
 }
 
@@ -106,31 +111,36 @@ li{list-style: none;}
 
 .searchPage{
   .header{
-    .mg(0px);  .pd(10px 0px);
+    .mg(0px);  .pd(10px 20%);
     .bgc(white); .pf(); .z(10); .w(100%);
-    box-shadow: #999 0px 5px 20px;
-    .search{
-      .w(100%); .bgc(#7f7f7f);
-      .pd(3px 0px 3px 10px);
-      .br(14px);
-      img{
-        .vm(); .disIB();
-        .w(20px);  .h(auto);
-        //.mg(0px 0px 0px 5px);
-      }
-      .searchInput{
-        .w(70%); .bgc(transparent); .disIB();
-        .mg(0px 10px); .c(white); .vm();
-        .b(0px); .lh(20px);
-      }
-      .searchInput:focus{
-         .b(0px); .lh(20px);
-        outline:none;
+    box-shadow: #999 0px 0px 10px;
+    .searchPanel{
+      .search{
+        .w(100%); .bgc(#7f7f7f);
+        .pd(3px 0px 3px 10px);
+        .br(14px);
+        img{
+          .vm(); .disI();
+          .w(20px);  .h(auto);
+          //.mg(0px 0px 0px 5px);
+        }
+        .searchInput{
+          .w(70%); .bgc(transparent); .disIB();
+          .mg(0px auto); .c(white); .vm();
+          .b(0px); .lh(20px); .tc();
+        }
+        .searchInput:focus{
+          .b(0px); .lh(20px);
+          outline:none; .tc();
+        }
+        .searchInput::-webkit-input-placeholder{
+          .c(white); .tc();
+        }
       }
     }
-    //.closeBtn{.disN();}
   }
   .container{
+    .w(60%);
     .pd(45px 0px 0px);
     .list{
       .pd(0px); .mg(3% 0px 0px);
@@ -138,7 +148,7 @@ li{list-style: none;}
         float: left;
         .thumbnail{
           .pd(0px);
-          box-shadow: #999 0px 5px 20px;
+          box-shadow: #999 0px 5px 15px;
           .b(0px); .br(10px);
           .avatar{
             .w(100%);
@@ -147,15 +157,16 @@ li{list-style: none;}
           }
           .caption{
             .pd(30px);
-            h3{ .pd(10px 0px);}
+            h3{.c(#4e4e4e); .pd(10px 0px); .ff("PingFangSC Regular");}
+            p, .weibo, span{.t(left); .ff("PingFangSC Regular"); .c(#4e4e4e); }
             .weibo{
               .pd(10px 0px);
               img{.h(20px); .mg(0px 10px); .vm();}
               span{
-                .f(20px); .vm();
+                .c(#4e4e4e); .f(20px); .vm(); .ff("PingFangSC Regular");
               }
             }
-            a{.c(@word);}
+            a{.c(#4e4e4e);.ff("PingFangSC Regular"); text-decoration: underline;}
           }
         }
       }
@@ -187,22 +198,53 @@ li{list-style: none;}
       .w(100%);
     }
     .caption{
-      h3{ .pd(10px 0px);}
-      p, .weibo, span{.t(left);}
+      h3{ .pd(10px 0px); .ff("PingFangSC Regular"); .c(#4e4e4e);}
+      p, .weibo, span{.t(left); .ff("PingFangSC Regular"); .c(#4e4e4e); }
       .weibo{
         .pd(10px 0px);
         img{.h(20px); .mg(0px 10px); .vm();}
         span{
-          .f(20px); .vm();
+          .f(20px); .vm(); .c(#4e4e4e);
         }
       }
-      a{.c(@word); .t(left);}
+      a{.c(#4e4e4e); .t(left); .ff("PingFangSC Regular"); text-decoration: underline;}
     }
   }
 }
 
 
+@media screen and  (min-width: 1600px){
+  .homePage{
+    .header {
+      .h(1000px);
+      .searchRow{
+        top: 900px;
+      }
+      .searchTop{top:0px;}
+      .tab{
+        .w(200px);  .pd(30px 30px 100px);
+      }
+    }
+  }
+}
+@media screen and  (min-width: 2000px){
+  .homePage{
+    .header {
+      .h(1200px);
+      .searchRow{
+        top: 1100px;
+      }
+      .searchTop{top:0px;}
+      .tab{
+        .w(240px);  .pd(30px 30px 130px);
+      }
+    }
+  }
+}
 @media screen and  (min-width: 1200px){
+  .tab{
+    .w(200px);  .pd(30px 30px 100px);
+  }
   .container {
     //width: 960px;
   }
@@ -210,7 +252,7 @@ li{list-style: none;}
     .disN();
   }
 }
-@media  (min-width: 992px){
+@media screen and (min-width: 992px){
   .container {
     //width: 900px;
   }

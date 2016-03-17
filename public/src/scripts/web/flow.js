@@ -52,7 +52,15 @@ $(function(){
         });
         $(window).scroll(function(e){
             //console.log($(window).scrollTop());
-            if($(window).scrollTop() >= 700){
+            var height;
+            if($(window).width() < 1600){
+                height = 700;
+            } else if($(window).width() < 2000){
+                height = 900;
+            } else {
+                height = 1100;
+            }
+            if($(window).scrollTop() >= height){
                 $('.searchRow').addClass('searchTop');
             } else {
                 $('.searchRow').removeClass('searchTop');
