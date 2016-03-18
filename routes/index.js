@@ -43,9 +43,9 @@ router.get("/mobile", function (req, res, next) {
 });
 
 /* GET mobile item page */
-router.get("/mobile/item", function (req, res, next) {
+router.get("/mobile/member", function (req, res, next) {
   if(req.query && req.query.id){
-    Interface.ajax({path: '/api/get?id='+req.query.id, method: 'GET'}).then(function(data){
+    Interface.ajax({path: '/api/member?id='+req.query.id, method: 'GET'}).then(function(data){
       res.render("mobile/item", data);
       console.log(data);
     }, Util.errCall);
@@ -57,11 +57,10 @@ router.get("/mobile/item", function (req, res, next) {
 /* GET search page. */
 router.get("/search", function (req, res, next) {
     if(req.query.search){
-        Interface.ajax({path: '/api/search/' + req.query.search, method: 'GET'}).then(function(data){
+        Interface.ajax({path: '/api/search/?q=' + req.query.search, method: 'GET'}).then(function(data){
             if(data.members && data.members.length){
                 res.render("web/search", data);
             } else {
-                data.name = req.query.search;
                 res.render("web/search", data);
             }
         });
@@ -94,29 +93,47 @@ router.get('/api/list', function(req, res, next) {
 
 });
 
-router.get("/api/search/:searchText", function (req, res, next) {
+router.get("/api/search/", function (req, res, next) {
   var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY);
   var skip = req.query.skip ? parseInt(req.query.skip) : 0;
   var limit = req.query.limit ? parseInt(req.query.limit) : 0;
+  var simple = !!req.query.simple;
+  var limit = req.query.only_return_name;
   skip = skip ? skip : 0;
   limit = limit ? limit : 30;
-  var text = req.params.searchText;
-  db.all("select * from member where 1=0\
-    or  name like '%" + text + "%'\
-    or  intro like '%" + text + "%'\
-    or  weibo_snippet like '%" + text + "%'\
-    limit " + skip + "," + limit, function(err, rows) {
-    var entries = {
-      "members" : rows,
-      "skip": skip,
-      "limit": limit
-    };
-    res.json(entries);
-    db.close();
-  });
+  var text = req.query.q;
+  console.log(req.query);
+  console.log(simple);
+  if (!simple) {
+    db.all("select * from member where 1=0\
+      or  name like '%" + text + "%'\
+      or  intro like '%" + text + "%'\
+      or  weibo_snippet like '%" + text + "%'\
+      limit " + skip + "," + limit, function(err, rows) {
+      var entries = {
+        "search_text": text,
+        "members" : rows,
+        "skip": skip,
+        "limit": limit
+      };
+      res.json(entries);
+      db.close();
+    });
+  } else {
+    var names = []
+    db.each("select name from member where 1=0\
+      or  name like '%" + text + "%'\
+      ", function(err, rows) {
+      names.push(rows['name'])
+    }, function(err, count) {
+      res.json(names);
+      db.close();
+    });
+  }
+
 });
 
-router.get("/api/get", function (req, res, next) {
+router.get("/api/member", function (req, res, next) {
   var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY);
   var skip = req.query.skip ? parseInt(req.query.skip) : 0;
   var limit = req.query.limit ? parseInt(req.query.limit) : 0;

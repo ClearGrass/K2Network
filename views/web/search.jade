@@ -6,7 +6,7 @@ block content
             div(class="col-xs-10 col-md-offset-9 col-md-3 searchPanel")
                 div(class="search")
                     img(src="/images/magnifier.png")
-                    input(type="text", class="searchInput")
+                    input(type="text", class="searchInput" value="#{search_text}")
             div(class="col-xs-1 closeBtn")
                 img(src="/images/closeBtn.png")
         - if(members && members.length)
@@ -16,7 +16,6 @@ block content
         - else if(members && members.length == 0)
             div(class="nolist")
                 img(src="/images/cloud@2x.png")
-                div 很抱歉，我们无法找到 <span class='searchName'> #{name} </span> 的结果
+                div 很抱歉，我们无法找到 <span class='searchName'> #{search_text} </span> 的结果
         //div(class="footer")
         //    include ../components/footer
-
