@@ -8,6 +8,9 @@ $(function(){
 
     $('body')
         .on('click', '.container ul li', function(e){
+            if(e.target.nodeName.toLowerCase() == 'a'){
+                return;
+            }
             var $li = $(this);
             var id = $li.attr('id');
             location.href = "/mobile/member?id=" + id;

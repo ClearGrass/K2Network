@@ -26,5 +26,7 @@ html( lang="zh-CN")
             div(class="container")
                 h3= name
                 div(class="dec")= intro
-                div(class="weibo")= weibo_snippet
+                div(class="weibo")
+                    img(src="/images/weibo.png")
+                    span()= weibo_snippet
                 a(src=weibo_url, class="url")= weibo_url
