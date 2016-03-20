@@ -10,7 +10,7 @@ $(function(){
         .on('click', '.container ul li', function(e){
             var $li = $(this);
             var id = $li.attr('id');
-            location.href = "/mobile/item?id=" + id;
+            location.href = "/mobile/member?id=" + id;
         })
         .on('keypress', function(e){
             if($('.searchBar .search input:active') && e.which == 13){

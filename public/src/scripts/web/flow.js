@@ -16,7 +16,7 @@ $(function(){
 
             var ua = navigator.userAgent.toLowerCase();
             if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
-                $.get('/api/get?id=' + id, function(data){
+                $.get('/api/member?id=' + id, function(data){
                     $.get('/dist/templates/card.html', function(tmpl){
                         $.blockUI({
                             message: _.template(tmpl)(data),
@@ -38,7 +38,7 @@ $(function(){
                     });
                 });
             } else {
-                location.href = '/mobile/item?id=' + id;
+                location.href = '/mobile/member?id=' + id;
             }
         })
         .on('click', '.blockOverlay', function(){
