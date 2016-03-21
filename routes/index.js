@@ -57,7 +57,10 @@ router.get("/mobile/member", function (req, res, next) {
 /* GET search page. */
 router.get("/search", function (req, res, next) {
     if(req.query.search){
-        Interface.ajax({path: '/api/search/?q=' + req.query.search, method: 'GET'}).then(function(data){
+      var q = req.query.search
+      q = encodeURI(q)
+      console.log(q);
+        Interface.ajax({path: '/api/search/?q=' + q, method: 'GET'}).then(function(data){
             if(data.members && data.members.length){
                 res.render("web/search", data);
             } else {
