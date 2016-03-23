@@ -1,16 +1,17 @@
 @import "base.less";
 
-*{.pd(0px); .mg(0px); .b(0px);}
+*{.pd(0px); .mg(0px); .b(0px);.ff("Georgia,PingFangSC Regular");}
 li{list-style: none;}
 .container{.pd(0px);}
 .row{.mg(0px); .pd(0px);}
 
 .homePage{
+  //min-width: 1098px;
   .header{
-    .w(100%); .h(800px);
+    .w(100%); .h(700px);
     .pd(0px 0px 10%);
     .bgimg('/images/cloud@2x.png');
-    .bgcenter();  .bgpos(100% 15%);
+    .bgcenter();  .bgpos(100% 25%);
     .logoTab{
       .mg(0px 20%); .w(60%);
       .tab{
@@ -27,12 +28,12 @@ li{list-style: none;}
           .c(@word); //.mg(50px auto);
         }
         .text{
-          .c(@word); .f(12px); .pd(30px 0px 80px);
+          .c(@word); .f(12px); .pd(50px 0px 130px);
         }
       }
     }
     .searchRow{
-      .pa(); top:700px; .w(100%);
+      .pa(); top:600px; .w(100%);
       .pd(5px 20%);
       .search{
         //.pd(140px 0px 50px);
@@ -45,18 +46,19 @@ li{list-style: none;}
           //.mg(0px 0px 0px 5px);
         }
         .searchInput{
-          .ff("PingFangSC Light");
+          .ff("PingFangSC Light"); .f(12px);
           .w(70%); .bgc(transparent); .disIB();
-          .mg(0px auto); .c(white); .vm();
-          .b(0px); .lh(20px); .tc();
+          .mg(0px 0px 0px 5px); .c(white); .vm();
+          .b(0px); .lh(20px);
         }
         .searchInput:focus{
           .b(0px); .lh(20px);
-          outline:none; .tc();
+          outline:none;
         }
-        .searchInput::-webkit-input-placeholder{  .c(white); .tc();  }
-        .searchInput::-moz-placeholder{.c(white); .tc();}
-        .searchInput:focus::-webkit-input-placeholder, .searchInput:focus::-moz-placeholder{  .c(white); .tc(); .opacity(50);  }
+        .searchInput::-webkit-input-placeholder{  .c(white); .mg(0px 10px);  }
+        .searchInput::-moz-placeholder{.c(white); .mg(0px 10px); }
+        .searchInput:focus::-webkit-input-placeholder, {  .c(white);  .opacity(0); .f(14px);  }
+        .searchInput:focus::-moz-placeholder{  .c(white);  .opacity(0);  .f(14px); }
       }
     }
     .searchTop{
@@ -74,25 +76,26 @@ li{list-style: none;}
         .pd(5px 22px);
         .thumbnail{
           .pd(0px);
+          cursor: pointer;
           box-shadow: #d9d9d9 0px 5px 15px;
-          .b(0px); .br(10px);
+          .b(0px); .br(7px);
           .avatar{
             .w(100%);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
           }
           .caption{
-            .pd(30px);
-            h3{ .pd(10px 0px); .c(#4e4e4e);.ff("PingFangSC Regular");}
-            p, .weibo, span{.t(left); .ff("PingFangSC Regular"); .c(#4e4e4e); }
+            .pd(0px 30px 30px);
+            h3{ .pd(10px 0px 20px); .c(#4e4e4e);.ff("PingFangSC Regular");}
+            p, .weibo, span{.t(left); .ff("PingFangSC Regular"); .c(#4e4e4e); .f(12px);}
             .weibo{
               .pd(10px 0px);
-              img{.h(20px); .mg(0px 10px); .vm();}
+              img{.h(20px); .mg(0px 10px 0px 0px); .vm();}
               span{
                 .f(20px); .vm(); .c(#4e4e4e);.ff("PingFangSC Regular");
               }
             }
-            a{.c(#4e4e4e);.ff("PingFangSC Regular"); text-decoration: underline;word-wrap: break-word;}
+            a{.c(#4e4e4e); text-decoration: underline;word-wrap: break-word;.f(12px);}
           }
         }
       }
@@ -135,12 +138,12 @@ li{list-style: none;}
         .br(14px);
         img{
           .vm(); .disI();
-          .w(20px);  .h(auto);
+          .w(20px);  .h(auto); float: left;
           //.mg(0px 0px 0px 5px);
         }
         .searchInput{
-          .w(70%); .bgc(transparent); .disIB();
-          .mg(0px auto); .c(white); .vm();
+          .bgc(transparent); .disIB(); .w(60%);
+          .mg(0px ); .c(white); .vm();
           .b(0px); .lh(20px); .tc();
         }
         .searchInput:focus{
@@ -149,6 +152,11 @@ li{list-style: none;}
         }
         .searchInput::-webkit-input-placeholder{
           .c(white); .tc();
+        }
+        .closeSearch{
+          float: right; .w(16px);
+          .mg(2px 5px 2px 0px);
+          cursor: pointer;
         }
       }
     }
@@ -163,11 +171,11 @@ li{list-style: none;}
         .thumbnail{
           .pd(0px);
           box-shadow: #999 0px 5px 15px;
-          .b(0px); .br(10px);
+          .b(0px); .br(7px);
           .avatar{
             .w(100%);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
           }
           .caption{
             .pd(30px);
@@ -198,6 +206,7 @@ li{list-style: none;}
     };
     .searchName{
       font-weight: bolder;
+      .ff("Georgia");
     }
   }
 }
@@ -207,7 +216,7 @@ li{list-style: none;}
   .thumbnail{
     .pd(50px);
     //box-shadow: #999 0px 5px 20px;
-    .b(0px); .br(10px);
+    .b(0px); .br(7px);
     .avatar{
       .w(100%);
     }
@@ -230,9 +239,9 @@ li{list-style: none;}
 @media screen and  (min-width: 1600px){
   .homePage{
     .header {
-      .h(1000px);
+      .h(900px);
       .searchRow{
-        top: 900px;
+        top: 750px;
       }
       .searchTop{top:0px;}
       .logoTab {
@@ -247,9 +256,9 @@ li{list-style: none;}
 @media screen and  (min-width: 2000px){
   .homePage{
     .header {
-      .h(1200px);
+      .h(1000px);
       .searchRow{
-        top: 1100px;
+        top: 850px;
       }
       .searchTop{top:0px;}
       .logoTab{
@@ -263,7 +272,8 @@ li{list-style: none;}
 }
 @media screen and  (min-width: 1200px){
   .tab{
-    .w(200px);  .pd(30px 30px 100px);
+    //.w(200px);
+    .pd(30px 30px 100px);
   }
   .container {
     //width: 960px;
@@ -282,9 +292,33 @@ li{list-style: none;}
 }
 
 @media screen and (max-width: 768px){
-  .container {
-    .w(100%);
+  .homePage{
+    .header{
+      .logoTab{
+        .w(100%); .mg(0px);
+      }
+    }
+    .container {
+      .w(100%);
+      .list{
+        .mg(6% 5% 0px);
+        .item{
+          .pd(0px 10px);
+          .thumbnail{
+            .caption{
+              .pd(10px);
+              h3{  .mg(0px); .pd(5px 0px);  }
+              p{  .mg(20px 0px);  }
+              .weibo{
+                img{ .mg(0px auto); .disB(); }
+              }
+            }
+          }
+        }
+      }
+    }
   }
+
   .searchPage{
     .header{
       .pd(10px 0px);
