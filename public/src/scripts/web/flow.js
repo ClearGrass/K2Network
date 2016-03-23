@@ -43,6 +43,10 @@ $(function(){
             }
         })
         .on('click', '.container ul li', function(e){
+            if(e.target.nodeName.toLowerCase() == 'a'){
+                return;
+            }
+
             var $li = $(this);
             var id = $li.attr('id');
 
