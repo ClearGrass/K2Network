@@ -1,4 +1,6 @@
 $(function(){
+    var scrollTop = 0;
+
     function render(data, fn){
         $.get('/dist/templates/card.html', function(tmpl){
             $.blockUI({
@@ -19,13 +21,17 @@ $(function(){
                     backgroundColor: 'white',
                     cursor: '',
                     opacity: 0.95
+                },
+                onBlock: function(){
+                    $(document).scrollTop(0);
+                    $('.homePage').css({
+                        //overflow: 'auto',
+                        position: 'fixed'
+                    });
                 }
             });
         });
-        $('.homePage').css({
-            //overflow: 'auto',
-            position: 'fixed'
-        });
+
         fn && fn();
     }
 
@@ -49,6 +55,7 @@ $(function(){
 
             var $li = $(this);
             var id = $li.attr('id');
+            scrollTop = $(document).scrollTop();
 
             var ua = navigator.userAgent.toLowerCase();
             if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
@@ -60,12 +67,13 @@ $(function(){
             }
         })
         .on('click', '.blockOverlay', function(){
-            $.unblockUI();
             $('.homePage').css({
                 overflow: 'auto',
                 height: 'auto',
                 position: ''
             });
+            $(document).scrollTop(scrollTop);
+            $.unblockUI();
         })
         .on('keypress', function(e){
             if($('.searchRow .search input:active') && e.which == 13){
