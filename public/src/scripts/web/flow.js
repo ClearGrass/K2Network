@@ -103,7 +103,9 @@ $(function(){
         $(window).scroll(function(e){
             //console.log($(window).scrollTop());
             var height;
-            if($(window).width() < 1600){
+            if($(window).width() < 1200){
+                height = 520;
+            } else if($(window).width() < 1600){
                 height = 600;
             } else if($(window).width() < 2000){
                 height = 750;
