@@ -25,7 +25,7 @@ li{list-style: none;}
           }
         }
         h3{
-          .c(@word); //.mg(50px auto);
+          .c(@word); .tc(); //.mg(50px auto);
         }
         .text{
           .c(@word); .f(12px); .pd(30px 0px 130px);
@@ -41,7 +41,7 @@ li{list-style: none;}
         .w(100%); .bgc(#bebebe); .br(14px);
         //cursor: pointer;
         img{
-          .vm(); .disI();
+          .vm(); .disI(); .mg(1px);
           .w(20px);  .h(auto);
           //.mg(0px 0px 0px 5px);
         }
@@ -121,12 +121,15 @@ li{list-style: none;}
     .bgc(white); .pf(); .z(10); .w(100%);
     box-shadow: #999 0px 0px 10px;
     .home{
-      img{
-        .vm(); .w(30px); .h(auto);
+      a{
+        img{
+          .vm(); .w(30px); .h(auto);
+        }
+        span{
+          .vm(); .c(@word); .f(16px); .pd(0px 10px);
+        }
       }
-      span{
-        .vm(); .c(@word); .f(16px); .pd(0px 10px);
-      }
+      a:hover{text-decoration: none;}
     }
     .home:focus{
       text-decoration: none;
@@ -137,13 +140,13 @@ li{list-style: none;}
         .pd(3px 0px 3px 10px);
         .br(14px);
         img{
-          .vm(); .disI();
+          .vm(); .disI(); .mg(1px);
           .w(20px);  .h(auto); float: left;
           //.mg(0px 0px 0px 5px);
         }
         .searchInput{
           .bgc(transparent); .disIB(); .w(60%);
-          .mg(0px 0px 0px 7px); .c(white); .vm();
+          .mg(0px 0px 1px 7px); .c(white); .vm();
           .b(0px); .lh(20px);
         }
         .searchInput:focus{
@@ -155,7 +158,7 @@ li{list-style: none;}
         }
         .closeSearch{
           float: right; .w(16px);
-          .mg(2px 5px 2px 0px);
+          .mg(3px 6px 3px 0px);
           cursor: pointer;
           .opacity(60);
         }
@@ -205,11 +208,11 @@ li{list-style: none;}
       .w(100%); .opacity(30); .z(1);
     }
     div{
-      .w(100%); .c(@word); .tc();
+      .w(100%); .c(@word); .tc(); font-weight: 100;
       .pa(); top: 130px; .f(18px);
     };
     .searchName{
-      font-weight: bolder;
+      font-weight: 900; .f(20px);
       //.ff("Georgia");
     }
   }
@@ -229,12 +232,12 @@ li{list-style: none;}
       p, .weibo, span{.t(left);  .c(#4e4e4e); }
       .weibo{
         .pd(10px 0px);
-        img{.h(20px); .mg(0px 10px); .vm();}
+        img{.h(20px); .mg(0px 10px 0px 0px); .vm();}
         span{
           .f(20px); .vm(); .c(#4e4e4e);
         }
       }
-      a{.c(#4e4e4e); .t(left);  text-decoration: underline;word-wrap: break-word;}
+      a{.c(#4e4e4e); .t(left);  text-decoration: underline;word-wrap: break-word; .disB();}
     }
   }
 }
@@ -245,6 +248,9 @@ li{list-style: none;}
     .header{
       .logoTab{
         .w(100%); .mg(0px);
+      }
+      .searchRow{
+        .pd(5px 0px);
       }
     }
     .container {

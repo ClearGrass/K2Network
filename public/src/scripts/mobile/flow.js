@@ -20,6 +20,16 @@ $(function(){
                 var val = $('.searchBar .search input').val();
                 location.href = "/search?search=" + val;
             }
+        })
+        .on('focus', '.searchInput', function(e){
+            $(e.target).closest('.search').css({
+                'box-shadow': '#1E90FF 0px 0px 1px 1px'
+            });
+        })
+        .on('blur', '.searchInput', function(e){
+            $(e.target).closest('.search').css({
+                'box-shadow': ''
+            });
         });
 
 });
