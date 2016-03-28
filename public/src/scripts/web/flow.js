@@ -29,8 +29,9 @@ $(function(){
                     $('.homePage').css({
                         //overflow: 'auto',
                         position: 'fixed',
-                        top: '-' + scrollTop
+                        'top': '-' + scrollTop + 'px'
                     });
+
 
                     fn && fn();
                 }
