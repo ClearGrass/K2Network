@@ -6,25 +6,25 @@ var Interface = require('../base/Interface');
 var router = express.Router();
 
 /* 中间件分发 */
-router.get("/", function (req, res, next){
-  var ua = req.headers['user-agent'].toLowerCase();
-  console.log(ua, ua.indexOf('android') < 0, ua.indexOf('iphone') < 0);
-  if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
-    next();
-  } else {
-    res.redirect('/mobile');
-  }
-});
+//router.get("/", function (req, res, next){
+//  var ua = req.headers['user-agent'].toLowerCase();
+//  console.log(ua, ua.indexOf('android') < 0, ua.indexOf('iphone') < 0);
+//  if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
+//    next();
+//  } else {
+//    res.redirect('/mobile');
+//  }
+//});
 
-router.get("/mobile", function (req, res, next){
-  var ua = req.headers['user-agent'].toLowerCase();
-  console.log(ua, ua.indexOf('android') < 0, ua.indexOf('iphone') < 0);
-  if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
-    res.redirect('/');
-  } else {
-    next();
-  }
-});
+//router.get("/mobile", function (req, res, next){
+//  var ua = req.headers['user-agent'].toLowerCase();
+//  console.log(ua, ua.indexOf('android') < 0, ua.indexOf('iphone') < 0);
+//  if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
+//    res.redirect('/');
+//  } else {
+//    next();
+//  }
+//});
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -35,12 +35,12 @@ router.get("/", function (req, res, next) {
 });
 
 /* GET mobile home page */
-router.get("/mobile", function (req, res, next) {
-  Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
-    res.render("mobile/mobile", data);
-    console.log(data);
-  }, Util.errCall);
-});
+//router.get("/mobile", function (req, res, next) {
+//  Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
+//    res.render("mobile/mobile", data);
+//    console.log(data);
+//  }, Util.errCall);
+//});
 
 /* GET mobile item page */
 router.get("/mobile/member", function (req, res, next) {

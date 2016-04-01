@@ -5,7 +5,7 @@ ul(class="row")
                 img(src=item.image_url,class="avatar")
                 div(class="caption")
                     h3= item.name
-                    p= item.intro
+                    p= (item.intro.substring(0, 150) == item.intro ? item.intro : item.intro.substring(0, 150)+ '...')
                     div(class="weibo")
                         img(src="/images/weibo.png")
                         span= item.weibo_snippet

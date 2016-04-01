@@ -39,6 +39,12 @@ $(function(){
         });
     }
 
+    function formatWord(str, length){
+        var len = length || 150;
+        var newStr = str.substring(0,len) + " ...";
+        return newStr;
+    }
+
     $('ul.row').imagesLoaded(function(){
         $('ul.row').masonry({
             columnWidth: '.item',
