@@ -8,7 +8,7 @@ $(function(){
                 message: _.template(tmpl)(data),
                 css: {
                     color:'#5d5d5d',
-                    backgroundColor:'white',
+                    backgroundColor:'transparent',
                     border:0,
                     width: '30%',
                     height: 'auto',
@@ -16,7 +16,7 @@ $(function(){
                     position: 'absolute',
                     cursor: '',
                     'margin-bottom': 20,
-                    'box-shadow': '#d9d9d9 0px 5px 15px',
+                    //'box-shadow': '#d9d9d9 0px 5px 15px',
                     'border-radius': 10
                 },
                 overlayCSS: {
