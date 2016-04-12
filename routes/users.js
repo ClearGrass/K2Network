@@ -98,7 +98,7 @@ router.post('/:id/delete', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var db = new sqlite.Database('db/db.db')
   var id = req.params.id
-  var insert = "INSERT INTO member(name, join_date, image_url, intro, weibo_url, weibo_snippet, position) VALUES ('%s', %d, '%s', '%s', '%s', '%s')";
+  var insert = "INSERT INTO member(name, join_date, image_url, intro, weibo_url, weibo_snippet, position) VALUES ('%s', %d, '%s', '%s', '%s', '%s', '%s')";
   insert = util.format(insert, req.body.name, 0, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position)
   console.log(insert);
   db.run(insert, function(err, result) {
