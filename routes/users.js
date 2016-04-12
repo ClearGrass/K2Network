@@ -19,11 +19,13 @@ router.get("/:id/edit", function (req, res, next) {
   var id = req.params.id
   db.get("select * from member where id = "+id+" limit 1", function(err, row) {
     if (row) {
-      datte = new Date(row.join_date)
-      y = datte.getFullYear()
-      m = datte.getMonth() + 1
-      d = datte.getDate()
-      row.join_date_string = util.format("%d-%s-%s",  y, m > 9 ? "" + m : "0" + m, d >= 9 ? "" + d : "0" + d)
+      if (row.join_date > 0) {
+        datte = new Date(row.join_date)
+        y = datte.getFullYear()
+        m = datte.getMonth() + 1
+        d = datte.getDate()
+        row.join_date_string = util.format("%d-%s-%s",  y, m > 9 ? "" + m : "0" + m, d >= 9 ? "" + d : "0" + d)
+      }
       console.log(row)
       res.render("edit", {title : "EDIT", data: row})
     } else {
