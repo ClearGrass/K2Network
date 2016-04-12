@@ -31,9 +31,9 @@ fs.mkdir("db", function() {
       id integer PRIMARY KEY autoincrement\
       , name varchar(15)\
       , image_url varchar(1000)\
-      , intro varchar(100)\
-      , weibo_url varchar(100)\
-      , weibo_snippet varchar(1000)\
+      , intro text\
+      , weibo_url varchar(1000)\
+      , weibo_snippet text\
       , position integer default 10\
       , join_date integer\
     )"
