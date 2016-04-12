@@ -10,9 +10,10 @@ $(function(){
                     color:'#5d5d5d',
                     backgroundColor:'transparent',
                     border:0,
-                    width: '30%',
+                    width: '40%',
                     height: 'auto',
                     top: '8%',
+                    left: '30%',
                     position: 'absolute',
                     cursor: '',
                     'margin-bottom': 20,
@@ -31,7 +32,6 @@ $(function(){
                         position: 'fixed',
                         'top': '-' + scrollTop + 'px'
                     });
-
 
                     fn && fn();
                 }
@@ -125,9 +125,9 @@ $(function(){
             } else if($(window).width() < 1600){
                 height = 600;
             } else if($(window).width() < 2000){
-                height = 750;
+                height = 680;
             } else if($(window).width() < 2300){
-                height = 850;
+                height = 820;
             } else {
                 height = 980;
             }
