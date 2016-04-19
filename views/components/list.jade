@@ -6,7 +6,7 @@ ul(class="row")
                 div(class="caption")
                     h3= item.name
                     p= (item.intro.substring(0, 150) == item.intro ? item.intro : item.intro.substring(0, 150)+ '...')
-                    div(class="weibo")
+                    //div(class="weibo")
                         img(src="/images/weibo.png")
                         span= item.weibo_snippet
                     a(href=item.weibo_url, target="_blank") #{item.weibo_url}
