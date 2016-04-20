@@ -143,13 +143,13 @@ li{list-style: none;}
         .pd(3px 0px 3px 10px);
         .br(14px);
         img{
-          .vm(); .disI(); .mg(1px);
-          .w(20px);  .h(auto); float: left;
+          .vm(); .disI(); .mg(3px 0px);
+          .w(16px);  .h(auto); float: left;
           //.mg(0px 0px 0px 5px);
         }
         .searchInput{
           .bgc(transparent); .disIB(); .w(60%);
-          .mg(0px 0px 1px 7px); .c(white); .vm();
+          .mg(0px 0px 0px 7px); .c(white); .vm();
           .b(0px); .lh(20px);
         }
         .searchInput:focus{
@@ -226,6 +226,7 @@ li{list-style: none;}
   .thumbnail{
     .pd(50px);
     .br(10px);
+    margin-bottom: 50px;
     box-shadow: #d9d9d9 0px 5px 15px;
     .b(0px); .br(7px);
     .avatar{
@@ -247,6 +248,17 @@ li{list-style: none;}
   }
 }
 
+
+
+@media screen and (max-width: 430px){
+  .searchPage{
+    .nolist{
+      img{
+        .w(260%); .mg(50px 0px 0px -80%);
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 768px){
   .homePage{

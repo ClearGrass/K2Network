@@ -14,7 +14,7 @@ li{list-style: none;}
     .searchBar{
       .mg(0px);  .pd(10px 10px);
       .bgc(white); .pf(); .z(10); .w(100%);
-      box-shadow: #999 0px 0px 10px;
+      box-shadow: #d9d9d9 0px 5px 15px;
       .search{
         .w(100%); .bgc(#bebebe);
         .pd(3px 0px 3px 10px);
@@ -48,11 +48,12 @@ li{list-style: none;}
       .pd(45px 15px 0px);
       .tab{
         .pd(10px 10px 0px); .mg(0px 5px 15px);
-        .bgimg('/images/tip_bg.png');
+        //.bgimg('/images/tip_bg.png');
+        .bg(-webkit-linear-gradient(rgba(255, 255, 255, 0.7) 80%, rgba(255, 255, 255, 0) 98%));
         .bgcenter(); .bgpos(50% 70%);
         .icon{
           img{
-            .mg(100px auto 30px); .disB();
+            .mg(70px auto 30px); .disB();
             .w(50px); .h(50px);
           }
         }
@@ -60,7 +61,7 @@ li{list-style: none;}
           .c(@word); .tc();
         }
         .text{
-          .c(@word); .f(12px); .pd(20px 0px 100px);
+          .c(@word); .f(12px); .pd(20px 0px 70px);
         }
       }
     }
@@ -83,7 +84,7 @@ li{list-style: none;}
       .pd(0px 10px);
       .thumbnail{
         .pd(0px);
-        box-shadow: #999 0px 5px 15px;
+        box-shadow: #d9d9d9 0px 5px 15px;
         .b(0px); .br(10px);
         .avatar{
           .w(100%);
@@ -93,7 +94,7 @@ li{list-style: none;}
         .caption{
           .pd(10px);
           h3{ .mg(0px); .pd(5px 0px);  .c(#4e4e4e);  }
-          p{  .mg(20px 0px);  .c(#4e4e4e); .f(12px); }
+          p{  .mg(5px 0px 20px);  .c(#4e4e4e); .f(12px); }
           .weibo{
             .pd(10px 0px);
             img{.h(20px); .vm(); .mg(5px auto); .disB(); }
@@ -112,7 +113,7 @@ li{list-style: none;}
 
 
 .footer{
-  .pd(150px 0px 50px); .tc();
+  .pd(50px 0px 50px); .tc();
   a{
     .c(@footer); .f(14px);
   }
@@ -179,7 +180,10 @@ li{list-style: none;}
     .pa(); top:0px; left: 0px; right: 0px; bottom: 0px;
     overflow: hidden;
     img{
-      .w(100%); .opacity(30); .z(1);
+      .w(250%); .opacity(30); .z(1);
+      margin-left: -80%;
+      margin-top: 50px;
+
     }
     div{
       .w(100%); .c(@word); .tc();

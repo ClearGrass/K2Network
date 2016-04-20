@@ -15,6 +15,9 @@ $(function(){
             var id = $li.attr('id');
             location.href = "/mobile/member?id=" + id;
         })
+        .on('click', '.tab', function(e){
+            location.href = "/mobile/member?id=tab";
+        })
         .on('keypress', function(e){
             if($('.searchBar .search input:active') && e.which == 13){
                 var val = $('.searchBar .search input').val();
