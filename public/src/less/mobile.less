@@ -10,8 +10,12 @@ li{list-style: none;}
     //.w(100%); .h(800px);
     .pd(0px 0px 10%);
     .bgimg('/images/cloud@2x.png');
-    .bgsize(230%);  .bgpos(50% 0%); .bgrepeat(no-repeat);
+    .bgsize(230%);  .bgpos(50% -10%); .bgrepeat(no-repeat);
     .searchBar{
+      .full{
+        padding-right: 0px;
+        padding-left: 5px;
+      }
       .mg(0px);  .pd(10px 10px);
       .bgc(white); .pf(); .z(10); .w(100%);
       .shadowMobile();
@@ -47,9 +51,9 @@ li{list-style: none;}
     .cxt{
       .pd(45px 15px 0px);
       .tab{
-        .pd(10px 10px 0px); .mg(0px 5px 15px);
+        //.pd(10px 10px 0px); .mg(0px 5px 15px);
         //.bgimg('/images/tip_bg.png');
-        .bg(-webkit-linear-gradient(rgba(255, 255, 255, 0.9) 80%, rgba(255, 255, 255, 0) 90%));
+        .bg(-webkit-linear-gradient(rgba(255, 255, 255, 0.9) 80%, rgba(255, 255, 255, 0.5) 90%, rgba(255, 255, 255, 0) 95%));
         .bgcenter(); .bgpos(50% 70%);
         .icon{
           img{
@@ -61,7 +65,7 @@ li{list-style: none;}
           .c(@word); .tc();
         }
         .text{
-          .c(@word); .f(14px); .pd(10% 0px 50%);
+          .c(@word); .f(14px); .pd(10% 10px 50%);
         }
       }
     }
@@ -81,9 +85,10 @@ li{list-style: none;}
 
     .item{
       float: left;
-      .pd(0px 10px);
+      .pd(0px 5px);
       .thumbnail{
         .pd(0px);
+        margin-bottom: 10px;
         .shadowItem();
         .b(0px); .br(@mobileRadius);
         .avatar{
@@ -92,9 +97,9 @@ li{list-style: none;}
           border-top-right-radius: @mobileRadius;
         }
         .caption{
-          .pd(10px);
+          .pd(20px);
           h3{ .mg(0px); .pd(5px 0px);  .c(#4e4e4e);  }
-          p{  .mg(5px 0px 20px);  .c(#4e4e4e); .f(12px); }
+          p{  .mg(5px 0px 20px);  .c(#4e4e4e); .f(12px); .pd(5px);}
           .weibo{
             .pd(10px 0px);
             img{.h(20px); .vm(); .mg(5px auto); .disB(); }
@@ -235,7 +240,7 @@ li{list-style: none;}
   .container {
     //width: 680px;
     margin-top: -30px;
-    .pd(0px 20px);
+    .pd(0px 10px);
   }
   .searchPage{
     .nolist{
