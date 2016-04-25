@@ -23,9 +23,10 @@ $(function(){
             }
             var $li = $(this);
             var id = $li.attr('id');
+            startX = 0, startY = 0;
             location.href = "/mobile/member?id=" + id;
         })
-        .on('touchstart', '.container ul li', function(e){
+        .on('touchstart', '.tab', function(e){
             startX = e.originalEvent.changedTouches[0].clientX;
             startY = e.originalEvent.changedTouches[0].clientY;
         })
@@ -33,6 +34,7 @@ $(function(){
             if(startX - e.originalEvent.changedTouches[0].clientX != 0 || startY - e.originalEvent.changedTouches[0].clientY != 0){
                 return;
             }
+            startX = 0, startY = 0;
             location.href = "/mobile/member?id=tab";
         })
         .on('keypress', function(e){
