@@ -7,7 +7,7 @@ $(function(){
     });
 
     $('body')
-        .on('click', '.container ul li', function(e){
+        .on('tap', '.container ul li', function(e){
             if(e.target.nodeName.toLowerCase() == 'a'){
                 return;
             }
