@@ -7,13 +7,13 @@ block content
                 a(href="/")
                     img(src="/images/logo.png")
                     span() K2 创业网络
-            div(class="col-xs-10 col-md-offset-6 col-md-3 searchPanel")
+            div(class="col-xs-1 closeBtn")
+                img(src="/images/closeBtn.png")
+            div(class="col-xs-offset-1 col-xs-10 col-md-offset-6 col-md-3 searchPanel")
                 div(class="search")
                     img(src="/images/magnifier.png")
                     input(type="text", class="searchInput",value="#{search_text}")
                     img(src="/images/closeSearch.png", class="closeSearch")
-            div(class="col-xs-1 closeBtn")
-                img(src="/images/closeBtn.png")
         - if(members && members.length)
             div(class="container")
                 div(class="list")
@@ -21,6 +21,6 @@ block content
         - else if(members && members.length == 0)
             div(class="nolist")
                 img(src="/images/cloud@2x.png")
-                div 很抱歉，我们无法找到 <span class='searchName'> #{search_text} </span> 的结果
+                div 很抱歉，我们无法找到 <span class='searchName'> #{search_text} </span> 的结果。
         //div(class="footer")
         //    include ../components/footer
