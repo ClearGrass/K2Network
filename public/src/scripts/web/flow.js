@@ -53,11 +53,11 @@ $(function(){
     });
 
     $('body')
-        .on('click', '.search .closeSearch', function(e){
-            if($('.search input').val()){
-                location.href = "/";
-            }
-        })
+        //.on('click', '.search .closeSearch', function(e){
+        //    if($('.search input').val()){
+        //        location.href = "/";
+        //    }
+        //})
         .on('click', '.container ul li', function(e){
             if(e.target.nodeName.toLowerCase() == 'a'){
                 return;
@@ -127,9 +127,9 @@ $(function(){
             //console.log($(window).scrollTop());
             var height;
             if($(window).width() < 1200){
-                height = 520;
+                height = 500;
             } else if($(window).width() < 1600){
-                height = 600;
+                height = 510;
             } else if($(window).width() < 2000){
                 height = 680;
             } else if($(window).width() < 2300){

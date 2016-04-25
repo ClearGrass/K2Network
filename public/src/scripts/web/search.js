@@ -6,6 +6,11 @@ $(function(){
                 location.search = "search=" + val;
             }
         })
+        .on('click', '.closeSearch', function(e){
+            $('.searchInput').val('');
+            $('.search input').focus();
+            //console.log($('.searchInput').val());
+        })
         .on('click', '.closeBtn', function(e){
             location.href = '/';
         });
