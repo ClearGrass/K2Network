@@ -73,7 +73,7 @@ router.post('/orders', function(req, res, next) {
 router.post('/:id', function(req, res, next) {
   var db = new sqlite.Database('db/db.db')
   var id = req.params.id
-  req.body.join_date = Date.parse(req.body.join_date_string)
+  req.body.join_date = Date.parse(req.body.join_date_string ? req.body.join_date_string : "2016-01-01")
   console.log(req.body);
   var update = "UPDATE member set name='%s', join_date = %d, image_url='%s', intro='%s', weibo_url='%s', weibo_snippet='%s', position='%d' WHERE id = %s"
   update = util.format(update, req.body.name, req.body.join_date, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position, id)
@@ -115,7 +115,7 @@ router.post('/', function(req, res, next) {
   }
 
   function insert () {
-    req.body.join_date = Date.parse(req.body.join_date_string)
+    req.body.join_date = Date.parse(req.body.join_date_string ? req.body.join_date_string : "2016-01-01")
     var insert = "INSERT INTO member(name, join_date, image_url, intro, weibo_url, weibo_snippet, position) VALUES ('%s', %d, '%s', '%s', '%s', '%s', '%s')";
     insert = util.format(insert, req.body.name, 0, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position)
     console.log(insert);
