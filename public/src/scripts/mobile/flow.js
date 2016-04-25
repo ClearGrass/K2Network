@@ -1,4 +1,7 @@
 $(function(){
+    var startX = 0;
+    var startY = 0;
+
     $('ul.row').imagesLoaded(function(){
         $('ul.row').masonry({
             columnWidth: '.item',
@@ -8,6 +11,13 @@ $(function(){
 
     $('body')
         .on('touchstart', '.container ul li', function(e){
+            startX = e.originalEvent.changedTouches[0].clientX;
+            startY = e.originalEvent.changedTouches[0].clientY;
+        })
+        .on('touchend', '.container ul li', function(e){
+            if(startX - e.originalEvent.changedTouches[0].clientX != 0 || startY - e.originalEvent.changedTouches[0].clientY != 0){
+                return;
+            }
             if(e.target.nodeName.toLowerCase() == 'a'){
                 return;
             }
