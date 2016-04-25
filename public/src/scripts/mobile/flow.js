@@ -25,7 +25,14 @@ $(function(){
             var id = $li.attr('id');
             location.href = "/mobile/member?id=" + id;
         })
-        .on('click', '.tab', function(e){
+        .on('touchstart', '.container ul li', function(e){
+            startX = e.originalEvent.changedTouches[0].clientX;
+            startY = e.originalEvent.changedTouches[0].clientY;
+        })
+        .on('touchend', '.tab', function(e){
+            if(startX - e.originalEvent.changedTouches[0].clientX != 0 || startY - e.originalEvent.changedTouches[0].clientY != 0){
+                return;
+            }
             location.href = "/mobile/member?id=tab";
         })
         .on('keypress', function(e){
