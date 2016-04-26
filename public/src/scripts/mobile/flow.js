@@ -40,7 +40,7 @@ $(function(){
         .on('keypress', function(e){
             if($('.searchBar .search input:active') && e.which == 13){
                 var val = $('.searchBar .search input').val();
-                location.href = "/search?search=" + val;
+                location.href = "/search?search=" + encodeURIComponent(val);
             }
         })
         .on('focus', '.searchInput', function(e){
