@@ -88,9 +88,9 @@ li{list-style: none;}
             border-top-right-radius: 7px;
           }
           .caption{
-            .pd(0px 30px 30px);
+            .pd(0px 30px 20px);
             h3{ .pd(10px 0px 10px); .c(#4e4e4e);}
-            p, .weibo, span{.t(left);  .c(#4e4e4e); .f(12px);}
+            p, .weibo, span{.t(left);  .c(#4e4e4e); .f(12px); .mg(0px);}
             .weibo{
               .pd(10px 0px);
               img{.h(20px); .mg(0px 10px 0px 0px); .vm();}
@@ -98,7 +98,7 @@ li{list-style: none;}
                 .f(20px); .vm(); .c(#4e4e4e);
               }
             }
-            a{.c(#4e4e4e); text-decoration: underline;word-wrap: break-word;.f(12px);}
+            a{.c(#4e4e4e); text-decoration: underline;word-wrap: break-word;.f(12px); .mg(10px 0px);}
           }
         }
       }
@@ -300,10 +300,11 @@ li{list-style: none;}
         .disN();
       }
       .closeBtn{
-        .disB();
+        .disB(); padding-right: 0px;
         img{
           .w(20px);
-          .mg(3px 0px);
+          .mg(5px auto);
+          .disB();
         };
       }
     }
