@@ -3,7 +3,7 @@ $(function(){
         .on('keypress', function(e){
             if($('.searchPage .search input:active') && e.which == 13){
                 var val = $('.searchPage .search input').val();
-                location.search = "search=" + val;
+                location.search = "search=" + encodeURIComponent(val);
             }
         })
         .on('click', '.closeSearch', function(e){
