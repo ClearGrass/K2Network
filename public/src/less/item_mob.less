@@ -1,4 +1,5 @@
 @import "base.less";
+.font(){font-family: "Georgia","PingFangSC Regular";}
 
 *{.pd(0px); .mg(0px); .b(0px); .c(#4e4e4e);}
 li{list-style: none;}
@@ -24,12 +25,12 @@ li{list-style: none;}
     }
   }
   .container{
-    h3{.tc(); .ff("PingFangSC Regular"); .c(#4e4e4e);  .mg(20px 0px);}
+    h3{.tc(); .font(); .c(#4e4e4e);  .mg(20px 0px);}
     .dec{
-      .pd(0px 30px); .ff("PingFangSC Regular"); .c(#4e4e4e);
+      .pd(0px 30px); .font(); .c(#4e4e4e); .lh(24px); .f(16px);
     }
     .weibo{
-      .pd(30px); .f(20px); .ff("PingFangSC Regular"); .c(#4e4e4e);
+      .pd(30px); .f(20px); .font(); .c(#4e4e4e);
       img{
         .w(30px); .vm();
       }
@@ -38,9 +39,9 @@ li{list-style: none;}
       }
     }
     .url{
-      .c(#4e4e4e);
-      .pd(0px 30px 40px); text-decoration: underline;
-      .ff("PingFangSC Regular"); .c(#4e4e4e);
+      .c(#4e4e4e); .disB();
+      .pd(20px 30px 40px); text-decoration: underline;
+      .font(); .c(#4e4e4e);
     }
   }
 }
