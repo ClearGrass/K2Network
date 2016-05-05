@@ -52,6 +52,23 @@ $(function(){
             $(e.target).closest('.search').css({
                 'box-shadow': ''
             });
-        });
+        })
+        .on('click', '.container ul li', function(e){
+            if(e.target.nodeName.toLowerCase() == 'a'){
+                return;
+            }
 
+            var $li = $(this);
+            var id = $li.attr('id');
+            scrollTop = $(document).scrollTop();
+
+            var ua = navigator.userAgent.toLowerCase();
+            if(ua.indexOf('android') < 0 && ua.indexOf('iphone') < 0){
+                $.get('/api/member?id=' + id, function(data){
+                    render(data);
+                });
+            } else {
+                location.href = '/mobile/member?id=' + id;
+            }
+        });
 });

@@ -76,6 +76,22 @@ $(function(){
                 location.href = '/mobile/member?id=' + id;
             }
         })
+        .on('touchstart', '.container ul li', function(e){
+            startX = e.originalEvent.changedTouches[0].clientX;
+            startY = e.originalEvent.changedTouches[0].clientY;
+        })
+        .on('touchend', '.container ul li', function(e){
+            if(startX - e.originalEvent.changedTouches[0].clientX != 0 || startY - e.originalEvent.changedTouches[0].clientY != 0){
+                return;
+            }
+            if(e.target.nodeName.toLowerCase() == 'a'){
+                return;
+            }
+            var $li = $(this);
+            var id = $li.attr('id');
+            startX = 0, startY = 0;
+            location.href = "/mobile/member?id=" + id;
+        })
         .on('click', '.blockOverlay', function(){
             $('.homePage').css({
                 overflow: 'auto',

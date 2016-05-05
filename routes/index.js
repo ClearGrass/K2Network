@@ -37,8 +37,10 @@ router.get("/", function (req, res, next) {
 /* GET mobile home page */
 router.get("/mobile", function (req, res, next) {
   Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
+    for(var i = 0; i < data.members.length; i++){
+      data.members[i].intro = Util.formatWord(data.members[i].intro, 50);
+    }
     res.render("mobile/mobile", data);
-    console.log(data);
   }, Util.errCall);
 });
 
@@ -58,6 +60,8 @@ router.get("/mobile/member", function (req, res, next) {
       });
     } else {
       Interface.ajax({path: '/api/member?id='+req.query.id, method: 'GET'}).then(function(data){
+        data.intro = Util.toLink(data.intro);
+        data.weibo_url = Util.delHttp(data.weibo_url);
         res.render("mobile/item", data);
         console.log(data);
       }, Util.errCall);
