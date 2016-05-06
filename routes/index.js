@@ -29,6 +29,9 @@ router.get("/mobile", function (req, res, next){
 /* GET home page. */
 router.get("/", function (req, res, next) {
   Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
+    for(var i = 0; i < data.members.length; i++){
+      data.members[i].intro = Util.delHttp(data.members[i].intro);
+    }
     res.render("web/k2", data);
     console.log(data);
   }, Util.errCall);
@@ -38,7 +41,7 @@ router.get("/", function (req, res, next) {
 router.get("/mobile", function (req, res, next) {
   Interface.ajax({path: '/api/list', method: 'GET'}).then(function(data){
     for(var i = 0; i < data.members.length; i++){
-      data.members[i].intro = Util.formatWord(data.members[i].intro, 50);
+      data.members[i].intro = Util.delHttp(Util.formatWord(data.members[i].intro, 50));
     }
     res.render("mobile/mobile", data);
   }, Util.errCall);
@@ -82,7 +85,7 @@ router.get("/search", function (req, res, next) {
             if(data.members && data.members.length){
                 if(Util.isMobile(req)){
                   for(var i = 0; i < data.members.length; i++){
-                    data.members[i].intro = Util.formatWord(data.members[i].intro, 50);
+                    data.members[i].intro = Util.delHttp(Util.formatWord(data.members[i].intro, 50));
                   }
                 }
                 res.render("web/search", data);
