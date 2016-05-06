@@ -64,7 +64,7 @@ router.get("/mobile/member", function (req, res, next) {
     } else {
       Interface.ajax({path: '/api/member?id='+req.query.id, method: 'GET'}).then(function(data){
         data.intro = Util.toLink(data.intro);
-        data.weibo_url = Util.delHttp(data.weibo_url);
+        data.weibo_url = Util.toLink(data.weibo_url);
         res.render("mobile/item", data);
         console.log(data);
       }, Util.errCall);
