@@ -73,12 +73,18 @@ router.get("/mobile/member", function (req, res, next) {
 
 /* GET search page. */
 router.get("/search", function (req, res, next) {
+  console.log(req.headers['user-agent']);
     if(req.query.search){
       var q = req.query.search
       q = encodeURI(q)
       console.log(q);
         Interface.ajax({path: '/api/search/?q=' + q, method: 'GET'}).then(function(data){
             if(data.members && data.members.length){
+                if(Util.isMobile(req)){
+                  for(var i = 0; i < data.members.length; i++){
+                    data.members[i].intro = Util.formatWord(data.members[i].intro, 50);
+                  }
+                }
                 res.render("web/search", data);
             } else {
                 res.render("web/search", data);

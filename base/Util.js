@@ -26,6 +26,9 @@ var Util = {
             newStr += " ...";
         }
         return newStr;
+    },
+    isMobile: function(req){
+        return (req.headers['user-agent'].toLowerCase().indexOf('iphone') >= 0) || (req.headers['user-agent'].toLowerCase().indexOf('android') >= 0);
     }
 };
 
