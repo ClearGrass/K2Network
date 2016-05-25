@@ -86,11 +86,10 @@ app.use('/users', function(req, res, next) {
           var password = config.users[req.body.username]
           if (password == req.body.password) {
             req.session.admin = 1
-            next()
-            return;
           }
         }
         res.redirect(req.originalUrl)
+        return;
       }
     } else {
       res.redirect(req.baseUrl + "?login=1")
