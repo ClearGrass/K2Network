@@ -1,6 +1,10 @@
 var express = require('express');
 var sqlite = require('sqlite3')
 var util = require('util')
+
+var http=require('http');
+var fs =require('fs');
+
 var router = express.Router();
 
 /* GET users listing. */
@@ -13,6 +17,13 @@ router.get('/', function(req, res, next) {
     // res.json(row)
   })
 });
+
+router.get('/download', function(req, res, next) {
+  res.writeHead(200, {'Content-Type':'application/db'});
+  var rs=fs.createReadStream('db/db.db');
+  rs.pipe(res);
+});
+
 
 router.get("/:id/edit", function (req, res, next) {
   var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
