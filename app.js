@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs')
 
 var sqlite = require('sqlite3')
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -62,9 +63,39 @@ fs.mkdir("db", function() {
   })
 })
 
+app.use(session({
+  secret: 'recommand 128 bytes random string', // 建议使用 128 个字符的随机字符串
+  cookie: { maxAge: 30 * 60 * 1000 }
+}));
 
 app.use('/', routes);
-app.use('/users', users);
+
+app.use('/users', function(req, res, next) {
+  if (req.session.admin) {
+    next()
+  } else {
+    if (req.query.login) {
+      console.log(req.method);
+      if (req.method == "GET") {
+        res.render("login", {title : "Login"})
+      } else if (req.method == "POST") {
+        console.log(req.body);
+        var config = require('./config/admin');
+        console.log(config);
+        if (config.users) {
+          var password = config.users[req.body.username]
+          if (password == req.body.password) {
+            req.session.admin = 1
+          }
+        }
+        res.redirect(req.originalUrl)
+        return;
+      }
+    } else {
+      res.redirect(req.baseUrl + "?login=1")
+    }
+  }
+}, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
