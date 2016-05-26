@@ -62,6 +62,20 @@ $(function(){
             columnWidth: '.item',
             itemSelector: '.item'
         });
+
+        //$('ul.row').infinitescroll({
+        //    navSelector: '#page',
+        //    nextSelector: '#page a', //下一页选择器
+        //    itemSelector: "li", //下一页中需要被加载进当前页的块
+        //    loading: { //加载效果
+        //        finishedMsg: 'No more pages to load',
+        //        img: 'http://i.imgur.com/6RMhx.gif',
+        //        selector:"#loadingbox"//指定图片加载的位置
+        //    }},
+        //    function (newElements) { //回调函数，用Masonry布局
+        //        var newElems = $(newElements);
+        //        $('ul.row').masonry('appended', newElems);
+        //    })
     });
 
     $('body')
