@@ -12,6 +12,6 @@ $(function(){
 
     $.get('/api/member', {id: id}).then(function(resp){
         //console.log(resp);
-        document.title = "K2-" + resp.name;
+        document.title = "K2 - " + resp.name;
     });
 });
