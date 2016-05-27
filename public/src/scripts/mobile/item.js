@@ -9,4 +9,9 @@ $(function(){
         $('.avatar img').css({'padding': '5% 35% 0%'});
     }
     $('.container .weibo').hide();
+
+    $.get('/api/member', {id: id}).then(function(resp){
+        //console.log(resp);
+        document.title = "K2-" + resp.name;
+    });
 });
