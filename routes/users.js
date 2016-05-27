@@ -4,9 +4,12 @@ var util = require('util')
 
 var http=require('http');
 var fs =require('fs');
+var path = require("path");
 
 var router = express.Router();
 
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
@@ -81,11 +84,11 @@ router.post('/orders', function(req, res, next) {
 })
 
 
-router.post('/:id', function(req, res, next) {
+router.post('/:id', upload.single("avater_upload"), function(req, res, next) {
   var db = new sqlite.Database('db/db.db')
   var id = req.params.id
   req.body.join_date = Date.parse(req.body.join_date_string ? req.body.join_date_string : "2016-01-01")
-  console.log(req.body);
+  dealUploadedAvater(req)
   var update = "UPDATE member set name='%s', join_date = %d, image_url='%s', intro='%s', weibo_url='%s', weibo_snippet='%s', position='%d' WHERE id = %s"
   update = util.format(update, req.body.name, req.body.join_date, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position, id)
   console.log(update);
@@ -113,7 +116,7 @@ router.post('/:id/delete', function(req, res, next) {
   })
 })
 
-router.post('/', function(req, res, next) {
+router.post('/', upload.single("avater_upload"), function(req, res, next) {
   var db = new sqlite.Database('db/db.db')
   var id = req.params.id
   if (req.body.position == 0) {
@@ -126,6 +129,9 @@ router.post('/', function(req, res, next) {
   }
 
   function insert () {
+    dealUploadedAvater(req)
+    console.log(req.body);
+    console.log(req.file);
     req.body.join_date = Date.parse(req.body.join_date_string ? req.body.join_date_string : "2016-01-01")
     var insert = "INSERT INTO member(name, join_date, image_url, intro, weibo_url, weibo_snippet, position) VALUES ('%s', %d, '%s', '%s', '%s', '%s', '%s')";
     insert = util.format(insert, req.body.name, 0, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position)
@@ -137,6 +143,60 @@ router.post('/', function(req, res, next) {
   }
 })
 
+
+function dealUploadedAvater(req) {
+  var file = req.file;
+  var fields = req.body;
+  if (file) {
+    var fileName;
+    if (fields.image_url) {
+      var image_url = fields.image_url.trim();
+      console.log(image_url);
+      if (image_url.indexOf("/") >= 0) {
+        fileName = image_url.substring(image_url.lastIndexOf("/") + 1);
+        if (!fileName) {
+          fileName = file.originalname
+        }
+      } else {
+        fileName = image_url
+      }
+    } else {
+      fileName = file.originalname
+    }
+    if (!fileName) {
+      fileName = "avater_image_" + new Date().getTime()
+    }
+    var extname = path.extname(fileName);
+    console.log("extname:" + extname);
+    var fileext = "." + file.mimetype.substr(file.mimetype.lastIndexOf('/') + 1)
+    if (fileext == ".jpeg") {
+      fileext = ".jpg"
+    }
+    if (fileext != extname) {
+      fileName = fileName + fileext
+    }
+    try {
+      fs.mkdirSync("./public/images/header/")
+    } catch (e) {}
+    var filePath = "./public/images/header/" + fileName
+    req.body.image_url  = "/images/header/" + fileName
+
+    fs.readFile(file.path, function (err, data) {
+      if (!err) {
+        fs.writeFile(filePath, data, function (err) {
+          if (!err) {
+            fs.unlinkSync(file.path);
+          }
+        });
+      }
+    });
+    // var data = fs.readFileSync(file.path);
+    // fs.writeFileSync(filePath, data);
+    // fs.unlinkSync(file.path);
+  } else {
+
+  }
+}
 
 router.get("/new", function (req, res, next) {
   var db = new sqlite.Database('db/db.db')
