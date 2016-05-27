@@ -2,3 +2,5 @@ node_modules
 bin
 public/dist
 db
+public/images/header
+uploads

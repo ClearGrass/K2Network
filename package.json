@@ -12,11 +12,6 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.7.6",
-    "jade": "~1.11.0",
-    "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0",
-    "sqlite3":"~3.1.1",
-    "q": "~1.4.1",
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-htmlmin": "^0.6.0",
@@ -25,6 +20,12 @@
     "grunt-contrib-livereload": "^0.1.2",
     "grunt-contrib-requirejs": "^0.4.4",
     "grunt-contrib-uglify": "^0.11.0",
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "^0.6.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.6.1",
+    "multer": "^1.1.0",
+    "q": "~1.4.1",
+    "serve-favicon": "~2.3.0",
+    "sqlite3": "~3.1.1"
   }
 }
