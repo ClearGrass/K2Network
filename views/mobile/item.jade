@@ -18,8 +18,10 @@ html( lang="zh-CN")
         div(class="itemPage")
             div(class="header")
                 div(class="row searchBar")
-                    div(class=" col-xs-2 closeBtn")
-                        img(src="/images/closeBtn.png")
+                    div(class=" col-xs-8 closeBtn")
+                        //img(src="/images/closeBtn.png")
+                        img(src="/images/logo@2x.png")
+                        span(class="closeTitle") K2 创业网络
                 div(class="row")
                     div(class="col-xs-12 avatar")
                         img(src=image_url)
@@ -29,5 +31,6 @@ html( lang="zh-CN")
                 div(class="weibo")
                     img(src="/images/weibo.png")
                     span()= weibo_snippet
+                img(src="/images/code.jpg" class="code")
                 //a(href=weibo_url, class="url", target="_blank")= weibo_url
                 div(class="url") !{weibo_url}
