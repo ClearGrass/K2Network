@@ -11,7 +11,9 @@ block content
         div(class='col-sm-2 col-sm-offset-8')
           form(action='/users/#{data.id}/delete' method="post"  id='delete_form_#{data.id}')
             input(type='button' class='btn btn-danger' value="Delete" data-toggle="modal" data-target='#deleteConfirm' data-rowid="#{data.id}" data-name="#{data.name}")
-
+    form(action="/qr" id="upload_qr_form" style="display:none;" enctype="multipart/form-data")
+      input(type="hidden" name="MAX_FILE_SIZE" value="1048576")
+      input(type="file" id="upload_qr" name="file")
     form(method='post' action='/users/#{undefined == data.id ? "" : data.id}' class='form-horizontal' enctype="multipart/form-data")
       div(class='form-group')
         label(for='name' class="col-sm-2 control-label") Name
@@ -25,10 +27,16 @@ block content
           input(id='position' name='position' class="form-control" type='number' value='#{undefined == data.position ? "0" : data.position}')
       div(class='form-group')
         label(for='image_url' class="col-sm-2 control-label") Image
-        div(class="col-sm-4")
+        div(class="col-sm-3")
           input(id='image_url' name='image_url' class="form-control" placeholder='Input Pinyin.jpg of Name' value='#{undefined == data.image_url ? "" : data.image_url}' type="text")
-        div(class="col-sm-6")
+        div(class="col-sm-3")
           input(id='avater_upload' name='avater_upload' class="btn" type="file")
+        div(class="col-sm-4")
+          div(class="input-group")
+            input(id='qr_string' name='qr_string' class="form-control" placeholder='QR url of Wechat' value='#{undefined == data.qr_string ? "" : data.qr_string}' type="url")
+            span(class="input-group-addon" id="click_upload_qr" class="bg-warning")
+              span(class="glyphicon glyphicon-qrcode")
+              //- span(class="glyphicon glyphicon-upload")
       div(class='form-group')
         label(for='intro' class="col-sm-2 control-label") Intro
         div(class="col-sm-10")
@@ -36,8 +44,6 @@ block content
       div(class='form-group')
         label(for='weibo_url' class="col-sm-2 control-label") Weibo
         div(class="col-sm-10")
-          //- div(class="input-group")
-          //-   span(class="input-group-addon") @
           input(id='weibo_url' name='weibo_url' class="form-control" placeholder='http://' value='#{undefined == data.weibo_url ? "" : data.weibo_url}' type="url")
       div(class='form-group')
         label(for='weibo_snippet' class="col-sm-2 control-label") Weibo Snippet
@@ -64,3 +70,72 @@ block content
         var theId = $(this).data("rowid")
         $('#delete_form_' + theId).submit()
       })
+      $("#click_upload_qr").click(function() {
+        $("#upload_qr").click()
+      })
+      
+      var obj = $("#click_upload_qr");
+      obj.on('dragenter', function (e) 
+      {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '2px solid #0B85A1');
+      });
+      obj.on('dragover', function (e) 
+      {
+         e.stopPropagation();
+         e.preventDefault();
+         $(this).css('border', '2px solid #0B85A1');
+      });
+      obj.on('dragleave', function(e) 
+      {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).css('border', '');
+      })
+      obj.on('drop', function (e) 
+      {
+       
+           $(this).css('border', '');
+           e.preventDefault();
+           var files = e.originalEvent.dataTransfer.files;
+       
+           //We need to send dropped files to Server
+          //-  handleFileUpload(files,obj);
+          console.log(files)
+          upload(files[0])
+      });
+      $("#upload_qr").change(function(v) {
+        console.log(v)
+        upload()
+      })
+      
+      function upload(file) {
+        $("#qr_string").val("")
+        $("#qr_string").attr("placeholder", "Uploading the QR file")
+        var formData = new FormData($('#upload_qr_form')[0])
+        if (file) {
+          formData.set("file", file)
+        }
+        $.ajax({
+          //url: '/qr',
+          url: 'http://api.qrserver.com/v1/read-qr-code/',
+          type: 'POST',
+          data: formData,  // The form with the file inputs.
+          processData: false,  // Using FormData, don't process data.
+          contentType: false,  // enctype="multipart/form-data". Setting the contentType to false is imperative, since otherwise jQuery will set it incorrectly.
+        }).done(function(data){
+          console.log(data);
+          $("#upload_qr").val("")
+          symbol = data[0].symbol[0]
+          if (symbol.error ) {
+            alert(symbol.error )
+          } else {
+            $("#qr_string").val(symbol.data)
+          }
+          $("#qr_string").attr("placeholder", "QR url of Wechat");
+        }).fail(function(){
+          alert("Try Later")
+          $("#qr_string").attr("placeholder", "QR url of Wechat");
+        });
+      }
