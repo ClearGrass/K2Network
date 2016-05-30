@@ -31,6 +31,13 @@ html( lang="zh-CN")
                 div(class="weibo")
                     img(src="/images/weibo.png")
                     span()= weibo_snippet
-                //img(src="/images/code.jpg" class="code")
+                img(src=qr_image class="code")
                 //a(href=weibo_url, class="url", target="_blank")= weibo_url
                 div(class="url") !{weibo_url}
+        div(class="footer")
+            div(class="company")
+                a(href="/mobile")
+                    img(src="/images/logo.png" class="footLogo")
+                    span K2 创业网络
+            a(href="mailTo:support@k2.cm") support@k2.cm
+            div(class="company") &copy; 2016 K2 创业网络
