@@ -11,6 +11,7 @@ var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var qr = require('./routes/qr')
 
 var app = express();
 
@@ -35,6 +36,7 @@ fs.mkdir("db", function() {
       , intro text\
       , weibo_url varchar(1000)\
       , weibo_snippet text\
+      , qr_string varchar(1000)\
       , position integer default 10\
       , join_date integer\
     )"
@@ -69,8 +71,9 @@ app.use(session({
 }));
 
 app.use('/', routes);
-
+app.use('/qr', qr)
 app.use('/users', function(req, res, next) {
+  // req.session.admin = 1
   if (req.session.admin) {
     next()
   } else {

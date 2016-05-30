@@ -10,6 +10,7 @@ var router = express.Router();
 
 var multer = require('multer');
 var upload = multer({ dest: 'uploads/' });
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
@@ -89,8 +90,8 @@ router.post('/:id', upload.single("avater_upload"), function(req, res, next) {
   var id = req.params.id
   req.body.join_date = Date.parse(req.body.join_date_string ? req.body.join_date_string : "2016-01-01")
   dealUploadedAvater(req)
-  var update = "UPDATE member set name='%s', join_date = %d, image_url='%s', intro='%s', weibo_url='%s', weibo_snippet='%s', position='%d' WHERE id = %s"
-  update = util.format(update, req.body.name, req.body.join_date, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position, id)
+  var update = "UPDATE member set name='%s', join_date = %d, image_url='%s', intro='%s', weibo_url='%s', weibo_snippet='%s', qr_string='%s', position='%d' WHERE id = %s"
+  update = util.format(update, req.body.name, req.body.join_date, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.qr_string, req.body.position, id)
   console.log(update);
   db.run(update, function(err) {
     db.close()
@@ -133,8 +134,8 @@ router.post('/', upload.single("avater_upload"), function(req, res, next) {
     console.log(req.body);
     console.log(req.file);
     req.body.join_date = Date.parse(req.body.join_date_string ? req.body.join_date_string : "2016-01-01")
-    var insert = "INSERT INTO member(name, join_date, image_url, intro, weibo_url, weibo_snippet, position) VALUES ('%s', %d, '%s', '%s', '%s', '%s', '%s')";
-    insert = util.format(insert, req.body.name, 0, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.position)
+    var insert = "INSERT INTO member(name, join_date, image_url, intro, weibo_url, weibo_snippet, qr_string, position) VALUES ('%s', %d, '%s', '%s', '%s', '%s', '%s', '%s')";
+    insert = util.format(insert, req.body.name, 0, req.body.image_url, req.body.intro, req.body.weibo_url, req.body.weibo_snippet, req.body.qr_string, req.body.position)
     console.log(insert);
     db.run(insert, function(err, result) {
       db.close()
@@ -203,9 +204,12 @@ router.get("/new", function (req, res, next) {
   db.get("SELECT MAX(position)+1 as pos FROM member", function(error, result) {
     db.close()
     position = result['pos']
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     res.render("edit", {title : "ADD", data: {"join_date_string":"2016-01-01", "position": position}})
   })
 
 })
+
 
 module.exports = router;
