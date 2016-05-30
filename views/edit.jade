@@ -118,8 +118,8 @@ block content
           formData.set("file", file)
         }
         $.ajax({
-          //url: '/qr',
-          url: 'http://api.qrserver.com/v1/read-qr-code/',
+          url: '/qr',
+          //- url: 'http://api.qrserver.com/v1/read-qr-code/',
           type: 'POST',
           data: formData,  // The form with the file inputs.
           processData: false,  // Using FormData, don't process data.

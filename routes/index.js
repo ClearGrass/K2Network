@@ -173,7 +173,7 @@ router.get("/api/member", function (req, res, next) {
   db.all("select * from member where id=" + id + " limit 1", function(err, rows) {
     if (rows && rows.length > 0) {
       var user = rows[0];
-      var base64QrString = new Buffer(user.qr_string).toString('base64')
+      var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
       user.qr_image = "/qr/" + base64QrString + "?base64=1"
       res.json(user);
     } else {
