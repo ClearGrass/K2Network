@@ -1,8 +1,11 @@
 var wxBridge = (function(){
     //if(!window.WeixinJSBridge) return;
     var opts = {
-        "img_url": "/images/logo@2x.png",
+        "appid": "",
+        "img_url": "http://k2.cm/images/logo.png",
         "link": "http://k2.cm",
+        "img_width":"126",
+        "img_height":"126",
         "desc": "K2 创业网络",
         "title": "K2 创业网络"
         };
