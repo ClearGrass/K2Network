@@ -75,7 +75,7 @@ $(function(){
     wx.onMenuShareTimeline({
         title: 'K2 创业网络', // 分享标题
         link: 'http://k2.cm', // 分享链接
-        imgUrl: 'http://k2.cm/images/logo.png' // 分享图标
+        imgUrl: 'http://k2.cm/images/logo.png', // 分享图标
         success: function () {
             // 用户确认分享后执行的回调函数
         },
