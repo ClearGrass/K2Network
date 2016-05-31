@@ -72,17 +72,15 @@ $(function(){
             }
         });
 
-    WeixinJSBridge.on('menu:share:timeline', function (argv) {
-        WeixinJSBridge.invoke('shareTimeline', {
-            "appid": "",
-            "img_url": "http://k2.cm/images/logo.png",
-            "link": "http://k2.cm",
-            "img_width":"126",
-            "img_height":"126",
-            "desc": "K2 创业网络",
-            "title": "K2 创业网络"
-        }, function (res) {
-            //_report('timeline', res.err_msg);
-        });
+    wx.onMenuShareTimeline({
+        title: 'K2 创业网络', // 分享标题
+        link: 'http://k2.cm', // 分享链接
+        imgUrl: 'http://k2.cm/images/logo.png' // 分享图标
+        success: function () {
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
     });
 });
