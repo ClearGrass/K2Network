@@ -72,10 +72,5 @@ $(function(){
             }
         });
 
-    wxBridge && wxBridge.weixinShareTimeline({
-        "img_url": "/images/logo@2x.png",
-        "link": "http://k2.cm",
-        "desc": "K2 创业网络",
-        "title": "K2 创业网络"
-    });
+    wxBridge.init();
 });

@@ -1,6 +1,36 @@
 var wxBridge = (function(){
-    if(!window.WeixinJSBridge) return;
+    //if(!window.WeixinJSBridge) return;
+    var opts = {
+        "img_url": "/images/logo@2x.png",
+        "link": "http://k2.cm",
+        "desc": "K2 创业网络",
+        "title": "K2 创业网络"
+        };
+
+    function onBridgeReady() {
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke('sendAppMessage', opts, function(res) {
+                WeixinJSBridge.log(res.err_msg);
+            });
+        });
+
+        WeixinJSBridge.on('menu:share:timeline', function(argv) {
+            WeixinJSBridge.invoke("shareTimeline", opts, function(e){
+                //alert(e.err_msg);
+            });
+        });
+    }
+
     return {
+        init: function(){
+            if (typeof WeixinJSBridge === "undefined"){
+                if (document.addEventListener){
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                }
+            }else{
+                onBridgeReady();
+            }
+        },
         //分享到朋友圈
         weixinShareTimeline: function (opts){
             WeixinJSBridge.invoke('shareTimeline',{
