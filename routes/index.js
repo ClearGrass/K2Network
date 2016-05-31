@@ -174,7 +174,7 @@ router.get("/api/member", function (req, res, next) {
     if (rows && rows.length > 0) {
       var user = rows[0];
       var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
-      user.qr_image = "/qr/" + base64QrString + "?base64=1"
+      user.qr_image = user.qr_string ? "/qr/" + base64QrString + "?base64=1" : null
       res.json(user);
     } else {
       res.json({});
