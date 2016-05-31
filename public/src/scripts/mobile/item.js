@@ -15,5 +15,17 @@ $(function(){
         document.title = resp.name ? "K2 - " + resp.name : "K2 创业网络";
     });
 
-    wxBridge.init();
+    WeixinJSBridge.on('menu:share:timeline', function (argv) {
+        WeixinJSBridge.invoke('shareTimeline', {
+            "appid": "",
+            "img_url": "http://k2.cm/images/logo.png",
+            "link": "http://k2.cm",
+            "img_width":"126",
+            "img_height":"126",
+            "desc": "K2 创业网络",
+            "title": "K2 创业网络"
+        }, function (res) {
+            //_report('timeline', res.err_msg);
+        });
+    });
 });

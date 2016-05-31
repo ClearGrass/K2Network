@@ -10,11 +10,7 @@ var wxBridge = (function(){
         "title": "K2 创业网络"
         };
 
-    WeixinJSBridge.on('menu:share:timeline', function (argv) {
-        WeixinJSBridge.invoke('shareTimeline', opts, function (res) {
-            //_report('timeline', res.err_msg);
-        });
-    });
+
 
 
     function onBridgeReady() {
@@ -29,6 +25,7 @@ var wxBridge = (function(){
                 //alert(e.err_msg);
             });
         });
+
     }
 
     return {
