@@ -15,15 +15,11 @@ $(function(){
         document.title = resp.name ? "K2 - " + resp.name : "K2 创业网络";
     });
 
-    wx.onMenuShareTimeline({
+    wxBridge.weixinShareTimeline({
         title: 'K2 创业网络', // 分享标题
         link: 'http://k2.cm', // 分享链接
         imgUrl: 'http://k2.cm/images/logo.png', // 分享图标
-        success: function () {
-            // 用户确认分享后执行的回调函数
-        },
-        cancel: function () {
-            // 用户取消分享后执行的回调函数
-        }
+        success: function () {},
+        cancel: function () {}
     });
 });
