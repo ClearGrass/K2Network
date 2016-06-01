@@ -64,7 +64,7 @@ router.get("/mobile/member", function (req, res, next) {
     } else {
       Interface.ajax({path: '/api/member?id='+req.query.id, method: 'GET'}).then(function(data){
         var qr_image = data.qr_image;
-        var letter = qr_image.split('/')[2].charAt(0);
+        //var letter = qr_image.split('/')[2].charAt(0);
         //data.qr_image = (letter == '?') ? 0 : data.qr_image;
         //console.log('letter:',letter, ', qr_image:', data.qr_image);
         data.intro = Util.toLink(data.intro);
