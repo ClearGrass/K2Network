@@ -65,7 +65,7 @@ router.get("/mobile/member", function (req, res, next) {
     } else {
       Interface.ajax({path: '/api/member?id='+req.query.id, method: 'GET'}).then(function(data){
         var qr_image = data.qr_image;
-        var letter = qr_image.split('/')[2].chatAt(0);
+        var letter = qr_image.split('/')[2].charAt(0);
         data.isQr = letter == '?' ? false : true;
         data.intro = Util.toLink(data.intro);
         data.weibo_url = Util.toLink(data.weibo_url);
