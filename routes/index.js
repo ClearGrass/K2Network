@@ -65,8 +65,8 @@ router.get("/mobile/member", function (req, res, next) {
       Interface.ajax({path: '/api/member?id='+req.query.id, method: 'GET'}).then(function(data){
         var qr_image = data.qr_image;
         var letter = qr_image.split('/')[2].charAt(0);
-        data.qr_image = letter == '?' ? false : data.qr_image;
-        console.log('letter:',letter, ', qr_image:', data.qr_image);
+        //data.qr_image = (letter == '?') ? 0 : data.qr_image;
+        //console.log('letter:',letter, ', qr_image:', data.qr_image);
         data.intro = Util.toLink(data.intro);
         data.weibo_url = Util.toLink(data.weibo_url);
         res.render("mobile/item", data);
