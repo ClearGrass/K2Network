@@ -15,11 +15,11 @@ $(function(){
         document.title = resp.name ? "K2 - " + resp.name : "K2 创业网络";
     });
 
-    wxBridge.weixinShareTimeline({
-        title: 'K2 创业网络', // 分享标题
-        link: 'http://k2.cm', // 分享链接
-        imgUrl: 'http://k2.cm/images/logo.png', // 分享图标
-        success: function () {},
-        cancel: function () {}
-    });
+    //wxBridge.weixinShareTimeline({
+    //    title: 'K2 创业网络', // 分享标题
+    //    link: 'http://k2.cm', // 分享链接
+    //    imgUrl: 'http://k2.cm/images/logo.png', // 分享图标
+    //    success: function () {},
+    //    cancel: function () {}
+    //});
 });
