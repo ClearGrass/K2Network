@@ -16,6 +16,12 @@ router.get('/', function(req, res, next) {
   var db = new sqlite.Database('db/db.db', sqlite.OPEN_READONLY)
   var id = req.params.id
   db.all("select * from member order by position ASC, id ASC", function(err, rows) {
+    var rows = rows.map(function(user) {
+      var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
+      user.qr_image = user.qr_string ? "/qr/" + base64QrString + "?base64=1&autoCreate=1" : null
+      return user
+    })
+
     res.render("members", {title : "LIST", datas: rows})
     db.close()
     // res.json(row)
@@ -99,7 +105,14 @@ router.post('/:id', upload.single("avater_upload"), function(req, res, next) {
       console.log(err);
       res.redirect("/users")
     } else {
-      res.redirect("/users")
+      if (req.body.qr_string) {
+        var createQrUrl = "/qr/" + req.body.qr_string + "?autoCreate=1"
+        Interface.ajax({path: createQrUrl, method: 'GET'}).then(function(data){
+          res.redirect("/users")
+        }, Util.errCall);
+      } else {
+        res.redirect("/users")
+      }
     }
   })
 })
@@ -139,7 +152,14 @@ router.post('/', upload.single("avater_upload"), function(req, res, next) {
     console.log(insert);
     db.run(insert, function(err, result) {
       db.close()
-      res.redirect("/users")
+      if (req.body.qr_string) {
+        var createQrUrl = "/qr/" + req.body.qr_string + "?autoCreate=1"
+        Interface.ajax({path: createQrUrl, method: 'GET'}).then(function(data){
+          res.redirect("/users")
+        }, Util.errCall);
+      } else {
+        res.redirect("/users")
+      }
     })
   }
 })

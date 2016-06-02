@@ -39,17 +39,45 @@ router.post("/", upload.single("file"), function (req, res, next) {
 })
 
 router.get("/:qrString", function (req, res, next) {
-  var qrString = req.params.qrString
+  var qrdir = "./public/images/header/qr/";
+  var qrString = req.params.qrString;
+  var base64String = qrString;
+  var autoCreate = req.query.autoCreate;
   if (req.query.base64 == 1) {
-    qrString = new Buffer(qrString, 'base64').toString('ascii');
-    console.log(qrString)
+    qrString = new Buffer(base64String, 'base64').toString('ascii');
   } else {
-    console.log(new Buffer(qrString).toString('base64'));
+    base64String = new Buffer(qrString).toString('base64');
   }
-  var qr = require('qr-image');
-  var code = qr.image(qrString, {type: "svg"})
-  res.type("svg")
-  code.pipe(res)
+  try {
+    fs.mkdirSync(qrdir)
+  } catch (e) {}
+
+  var qrname = qrdir + base64String + '.png';
+  fs.stat(qrname, function(err, stat) {
+    console.log("file state : " + stat);
+    if (err) {
+      //文件不存在
+      if (autoCreate == 1) {
+        console.log("create qr file");
+        //创建文件
+        var qr = require('qr-image');
+        var code = qr.image(qrString, {type: "png"})
+        code.pipe(fs.createWriteStream(qrname));
+        res.type("png");
+        code.pipe(res);
+        return
+      } else {
+          console.log("Not found file");
+          //404
+          next()
+          return;
+      }
+    }
+    console.log("read and output file");
+    //输出文件
+    res.type("png");
+    fs.createReadStream(qrname).pipe(res);
+  });
 })
 
 module.exports = router;
