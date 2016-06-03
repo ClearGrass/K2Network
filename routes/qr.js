@@ -43,11 +43,39 @@ router.get("/:qrString", function (req, res, next) {
   var qrString = req.params.qrString;
   var base64String = qrString;
   var autoCreate = req.query.autoCreate;
+  var returnForce = req.query.returnForce;
   if (req.query.base64 == 1) {
     qrString = new Buffer(base64String, 'base64').toString('ascii');
   } else {
     base64String = new Buffer(qrString).toString('base64');
   }
+
+  var wxSize = 35;
+  var qrSize = 200;
+  var centerPoint = (qrSize - wxSize) / 2;
+
+  if (returnForce == 1) {
+    var qr = require('qr-image');
+    var code = qr.image(qrString, {type: "png", customize: function (bitmap) {
+      var png = require('qr-image/lib/png');
+      var qrBuffer = png.png_sync(bitmap)
+      var images = require("images")
+
+      var logo = images('./public/images/weixin_in_qr.png')
+      logo.size(wxSize)
+
+      var qr = images(qrBuffer)
+      qr.size(qrSize)
+      qr.draw(logo, centerPoint, centerPoint)
+      var newBuffer = qr.encode("png")
+      res.write(newBuffer)
+      res.end()
+    }})
+
+    // code.pipe(res)
+    return;
+  }
+
   try {
     fs.mkdirSync(qrdir)
   } catch (e) {}
@@ -61,11 +89,23 @@ router.get("/:qrString", function (req, res, next) {
         console.log("create qr file");
         //创建文件
         var qr = require('qr-image');
-        var code = qr.image(qrString, {type: "png"})
-        code.pipe(fs.createWriteStream(qrname));
-        res.type("png");
-        code.pipe(res);
-        return
+        var code = qr.image(qrString, {type: "png", customize: function (bitmap) {
+          var png = require('qr-image/lib/png');
+          var qrBuffer = png.png_sync(bitmap)
+          var images = require("images")
+
+          var logo = images('./public/images/weixin_in_qr.png')
+          logo.size(wxSize)
+
+          var qr = images(qrBuffer)
+          qr.size(qrSize)
+          qr.draw(logo, centerPoint, centerPoint)
+          qr.save(qrname)
+          qrBuffer = qr.encode("png")
+          res.write(qrBuffer);
+          res.end()
+        }})
+        return;
       } else {
           console.log("Not found file");
           //404
