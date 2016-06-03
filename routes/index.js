@@ -2,6 +2,7 @@ var express = require('express');
 var sqlite = require('sqlite3');
 var Util = require('../base/Util');
 var Interface = require('../base/Interface');
+var fs = require("fs")
 
 var router = express.Router();
 
@@ -174,8 +175,15 @@ router.get("/api/member", function (req, res, next) {
     if (rows && rows.length > 0) {
       var user = rows[0];
       var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
-      user.qr_image = user.qr_string ? "/qr/" + base64QrString + "?base64=1" : null
-      res.json(user);
+      var qrFile = "/images/header/qr/" + base64QrString + ".png";
+      fs.stat("./public" + qrFile, function(err, data) {
+        if (err) {
+          user.qr_image = null
+        } else {
+          user.qr_image = qrFile
+        }
+        res.json(user);
+      })
     } else {
       res.json({});
     }
