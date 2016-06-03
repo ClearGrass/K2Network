@@ -8,12 +8,7 @@ $(function(){
     if(id == 'tab'){
         $('.avatar img').css({'padding': '5% 35% 0%'});
     }
-    $('.container .weibo').hide();
-
-    $.get('/api/member', {id: id}).then(function(resp){
-        //console.log(resp);
-        document.title = resp.name ? "K2 - " + resp.name : "K2 创业网络";
-    });
+    // $('.container .weibo').hide();
 
     //wxBridge.weixinShareTimeline({
     //    title: 'K2 创业网络', // 分享标题

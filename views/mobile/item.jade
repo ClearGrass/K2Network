@@ -4,7 +4,7 @@ html( lang="zh-CN")
         meta(charset="utf-8")
         meta(name="viewport",content="width=device-width, initial-scale=1.0, user-scalable=0;")
         link(rel="shortcut icon" href="/images/logo.png" type="image/x-icon")
-        title= "K2 创业网络"
+        title= "K2 - " + name
         link(rel="stylesheet",type="text/css",href="/dist/styles/bootstrap.css")
         link(rel = "stylesheet", type = "text/css", href = "/dist/styles/item_mob.css")
         script(src="/dist/scripts/vendors/jquery/jquery-1.11.3.min.js")
@@ -32,7 +32,7 @@ html( lang="zh-CN")
             div(class="container")
                 h3= name
                 div(class="dec") !{intro}
-                div(class="weibo")
+                div(class="weibo hidden")
                     img(src="/images/weibo.png")
                     span()= weibo_snippet
                 - if (qr_image)
