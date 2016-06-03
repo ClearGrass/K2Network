@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
   db.all("select * from member order by position ASC, id ASC", function(err, rows) {
     var rows = rows.map(function(user) {
       var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
-      user.qr_image = user.qr_string ? "/qr/" + base64QrString + "?base64=1&autoCreate=1" : null
+      user.qr_image = user.qr_string ? "/qr/" + base64QrString + "?base64=1&autoCreate=1&wxLogo=1" : null
       return user
     })
 

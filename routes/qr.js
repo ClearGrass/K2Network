@@ -43,7 +43,8 @@ router.get("/:qrString", function (req, res, next) {
   var qrString = req.params.qrString;
   var base64String = qrString;
   var autoCreate = req.query.autoCreate;
-  var returnForce = req.query.returnForce;
+  var newGen = req.query.newGen;
+  var wxLogo = req.query.wxLogo;
   if (req.query.base64 == 1) {
     qrString = new Buffer(base64String, 'base64').toString('ascii');
   } else {
@@ -54,25 +55,28 @@ router.get("/:qrString", function (req, res, next) {
   var qrSize = 200;
   var centerPoint = (qrSize - wxSize) / 2;
 
-  if (returnForce == 1) {
+  if (newGen == 1) {
     var qr = require('qr-image');
     var code = qr.image(qrString, {type: "png", customize: function (bitmap) {
-      var png = require('qr-image/lib/png');
-      var qrBuffer = png.png_sync(bitmap)
-      var images = require("images")
+      if (wxLogo == 1) {
+        var png = require('qr-image/lib/png');
+        var qrBuffer = png.png_sync(bitmap)
+        var images = require("images")
 
-      var logo = images('./public/images/weixin_in_qr.png')
-      logo.size(wxSize)
+        var logo = images('./public/images/weixin_in_qr.png')
+        logo.size(wxSize)
 
-      var qr = images(qrBuffer)
-      qr.size(qrSize)
-      qr.draw(logo, centerPoint, centerPoint)
-      var newBuffer = qr.encode("png")
-      res.write(newBuffer)
-      res.end()
+        var qr = images(qrBuffer)
+        qr.size(qrSize)
+        qr.draw(logo, centerPoint, centerPoint)
+        var newBuffer = qr.encode("png")
+        res.write(newBuffer)
+        res.end()
+      }
     }})
-
-    // code.pipe(res)
+    if (wxLogo != 1) {
+      code.pipe(res)
+    }
     return;
   }
 
