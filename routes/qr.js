@@ -94,21 +94,27 @@ router.get("/:qrString", function (req, res, next) {
         //创建文件
         var qr = require('qr-image');
         var code = qr.image(qrString, {type: "png", customize: function (bitmap) {
-          var png = require('qr-image/lib/png');
-          var qrBuffer = png.png_sync(bitmap)
-          var images = require("images")
-
-          var logo = images('./public/images/weixin_in_qr.png')
-          logo.size(wxSize)
-
-          var qr = images(qrBuffer)
-          qr.size(qrSize)
-          qr.draw(logo, centerPoint, centerPoint)
-          qr.save(qrname)
-          qrBuffer = qr.encode("png")
-          res.write(qrBuffer);
-          res.end()
+          if (wxLogo == 1) {
+            var png = require('qr-image/lib/png');
+            var qrBuffer = png.png_sync(bitmap)
+            var images = require("images")
+  
+            var logo = images('./public/images/weixin_in_qr.png')
+            logo.size(wxSize)
+  
+            var qr = images(qrBuffer)
+            qr.size(qrSize)
+            qr.draw(logo, centerPoint, centerPoint)
+            qr.save(qrname)
+            qrBuffer = qr.encode("png")
+            res.write(qrBuffer);
+            res.end()
+          }
         }})
+        if (wxLogo != 1) {
+          code.pipe(fs.createWriteStream(qrname))
+          code.pipe(res)
+        }
         return;
       } else {
           console.log("Not found file");
