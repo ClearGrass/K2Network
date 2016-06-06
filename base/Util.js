@@ -35,14 +35,18 @@ var Util = {
       if (isSingle) {
         user = rows;
         if (config.users_header_base_url) {
-          user.qr_image = user.qr_image ? config.users_header_base_url + user.qr_image : user.qr_image;
+          var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
+          var qrFile = "/images/header/qr/" + base64QrString + ".png";
+          user.qr_image = user.qr_string ? config.users_header_base_url + user.qr_image : user.qr_image;
           user.image_url = user.image_url ? config.users_header_base_url + user.image_url : user.image_url;
         }
         return user;
       } else {
         var rows = rows.map(function(user) {
           if (config.users_header_base_url) {
-            user.qr_image = user.qr_image ? config.users_header_base_url + user.qr_image : user.qr_image;
+            var base64QrString = user.qr_string ? new Buffer(user.qr_string).toString('base64') : ""
+            var qrFile = "/images/header/qr/" + base64QrString + ".png";
+            user.qr_image = user.qr_string ? config.users_header_base_url + qrFile : user.qr_image;
             user.image_url = user.image_url ? config.users_header_base_url + user.image_url : user.image_url;
           }
           return user;
