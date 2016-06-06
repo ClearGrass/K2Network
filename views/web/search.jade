@@ -12,15 +12,18 @@ block content
             div(class="col-xs-10 col-md-offset-6 col-md-3 searchPanel")
                 div(class="search")
                     img(src="/images/magnifier.png")
-                    input(type="text", class="searchInput",value="#{search_text}")
+                    input(type="text", class="searchInput",value="#{search_text ? search_text : ''}")
                     img(src="/images/closeSearch.png", class="closeSearch")
         - if(members && members.length)
             div(class="container")
                 div(class="list")
                     include ../components/list
-        - else if(members && members.length == 0)
+        - else if(!members || members.length == 0)
             div(class="nolist")
                 img(src="/images/cloud@2x.jpg")
-                div 很抱歉，我们无法找到 <span class='searchName'> #{search_text} </span> 的结果。
+                if search_text
+                  div 很抱歉，我们无法找到 <span class='searchName'> #{search_text} </span> 的结果。
+                else 
+                  div 请输入搜索关键词。
         //div(class="footer")
         //    include ../components/footer
