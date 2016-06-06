@@ -29,7 +29,28 @@ var Util = {
     },
     isMobile: function(req){
         return (req.headers['user-agent'].toLowerCase().indexOf('iphone') >= 0) || (req.headers['user-agent'].toLowerCase().indexOf('android') >= 0);
+    },
+    dealUsersLink: function(rows, isSingle) {
+      config = require("../config/admin")
+      if (isSingle) {
+        user = rows;
+        if (config.users_header_base_url) {
+          user.qr_image = user.qr_image ? config.users_header_base_url + user.qr_image : user.qr_image;
+          user.image_url = user.image_url ? config.users_header_base_url + user.image_url : user.image_url;
+        }
+        return user;
+      } else {
+        var rows = rows.map(function(user) {
+          if (config.users_header_base_url) {
+            user.qr_image = user.qr_image ? config.users_header_base_url + user.qr_image : user.qr_image;
+            user.image_url = user.image_url ? config.users_header_base_url + user.image_url : user.image_url;
+          }
+          return user;
+        })
+        return rows;
+      }
     }
+
 };
 
 module.exports = Util;

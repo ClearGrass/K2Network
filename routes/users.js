@@ -1,6 +1,7 @@
 var express = require('express');
 var sqlite = require('sqlite3')
 var util = require('util')
+var Util = require('../base/Util');
 
 var http=require('http');
 var fs =require('fs');
@@ -21,7 +22,7 @@ router.get('/', function(req, res, next) {
       user.qr_image = user.qr_string ? "/qr/" + base64QrString + "?base64=1&autoCreate=1&wxLogo=1" : null
       return user
     })
-
+    rows = Util.dealUsersLink(rows)
     res.render("members", {title : "LIST", datas: rows})
     db.close()
     // res.json(row)

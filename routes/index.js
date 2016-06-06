@@ -110,6 +110,7 @@ router.get('/api/list', function(req, res, next) {
     totalCount = (row['count(0)']);
     db.all("select * from member  order by position ASC, id ASC limit " + skip + "," + limit, function(err, rows) {
       console.log(JSON.stringify(rows));
+      rows = Util.dealUsersLink(rows)
       var entries = {
         "members" : rows,
         "totalCount": totalCount,
@@ -140,6 +141,8 @@ router.get("/api/search/", function (req, res, next) {
       or  intro like '%" + text + "%'\
       or  weibo_snippet like '%" + text + "%'\
       limit " + skip + "," + limit, function(err, rows) {
+
+      rows = Util.dealUsersLink(rows)
       var entries = {
         "search_text": text,
         "members" : rows,
@@ -182,6 +185,8 @@ router.get("/api/member", function (req, res, next) {
         } else {
           user.qr_image = qrFile
         }
+
+        user = Util.dealUsersLink(user, true)
         res.json(user);
       })
     } else {
