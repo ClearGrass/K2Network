@@ -105,7 +105,7 @@ router.get('/api/list', function(req, res, next) {
   var skip = req.query.skip ? parseInt(req.query.skip) : 0;
   var limit = req.query.limit ? parseInt(req.query.limit) : 0;
   skip = skip ? skip : 0;
-  limit = limit ? limit : 30;
+  limit = limit ? limit : 50;
   db.each("select count(0) from member", function(err, row){
     totalCount = (row['count(0)']);
     db.all("select * from member  order by position ASC, id ASC limit " + skip + "," + limit, function(err, rows) {
